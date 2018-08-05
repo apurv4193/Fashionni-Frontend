@@ -1,0 +1,23 @@
+.company-block figcaption.clone-icon {padding: 13px 45px 4px;font-size: 17px;}
+.company-block figcaption span{top: 3px;}
+.company-img{height: 219px;}
+.confirm-notification{padding-bottom: 0;}
+.confirm-notification h2{margin-bottom: 0px;}
+@media(max-width:1900px){
+    .company-img{height: 171px;}
+}
+@media(max-width:1500px){
+    .company-img{height: 147px;}
+}
+@media(max-width:1364px){
+    .company-img{height: 170px;}
+}
+@media (max-width:1200px){
+    .company-img{height: 133.8px;}
+    .company-block figcaption.clone-icon{font-size: 14px;padding: 13px 29px 4px;}
+}
+@media (max-width:991px){
+    .company-block figcaption.clone-icon{font-size: 12px;padding: 9px 29px 6px;}
+    .form-group label,.form-control{padding: 9px 5px 4px;}
+    .company-img{height: 99px;}
+}

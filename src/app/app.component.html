@@ -1,0 +1,25 @@
+<!--<ng2-slim-loading-bar></ng2-slim-loading-bar>-->
+<ng2-slim-loading-bar [color]="'#BDA97F'" [height]="'6px'" class="default-loader"></ng2-slim-loading-bar>
+
+<app-header></app-header>
+
+<span *ngIf="sidebar?.isBoutique">
+    <app-sidebar-boutique *ngIf="isLoggedIn && !isAdmin"></app-sidebar-boutique>
+    <app-sidebar *ngIf="isLoggedIn && isAdmin"></app-sidebar>
+</span>
+
+<span *ngIf="sidebar?.isProduct">
+    <app-product-sidebar *ngIf="isLoggedIn && isAdmin"></app-product-sidebar>
+
+    <app-brand-sidebar *ngIf="isLoggedIn && !isAdmin"></app-brand-sidebar>
+</span>
+
+<span *ngIf="sidebar?.isMessage">
+    <app-messages-sidebar *ngIf="isLoggedIn"></app-messages-sidebar> 
+</span>
+
+
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

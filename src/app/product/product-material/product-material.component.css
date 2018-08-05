@@ -1,0 +1,74 @@
+.print-icon{top: 8px;}
+.company-heading h2{text-align: left;padding-left: 50px;}
+.company-heading .lock-icon{color: #000;}
+.color-content{margin-bottom: 20px;}
+.add-color, .edit-color{width: 25%;display: inline-block;padding-right:15px;vertical-align: top;}
+.edit-color{margin-left: -4px;padding-right: 0;padding-left: 15px;position: relative;}
+.color-sec{width: 50%;display: inline-block;margin-left: -4px;padding:0 15px;}
+.color-content .company-img{border-bottom: none;height: 360px;}
+.color-content .company-block > div{border-bottom: none;}
+.company-img span{padding: 0;top: 0;transform: translate(0);height: 100%;}
+.color-content .company-img img{width: 100%;height: 100%;}
+.brand-name-list label{background: transparent;width: 28px;height: auto;border: none;position: absolute;padding: 0;top: 18px;left: 15px;}
+.brand-name-list .form-group{position: relative;margin-bottom: 0;}
+.brand-name-list .form-control{width: 100%;margin-left: 0;border-bottom: none;padding: 12px 12px 6px 65px;height: 58px;border-width: 2px;border-color: #d6d6d6;}
+.brand-name-list .form-group:last-child .form-control{border-bottom: 2px solid #ccc;}
+.cancel-popup{top: 10px;right: 16px;}
+.btn-default{width: 100%;border: none;box-shadow: none;outline: none;font-size: 17px;text-transform: capitalize;background: #eeeeee;text-align: center;padding: 18px 10px 12px;border: 2px solid #ccc;border-top: none;}
+.color-list{background: #eee;padding:30px 20px 12px;margin: 0 -5px;overflow-x: auto;height: 886px;font-size: 0;}
+.color-block{padding: 0 5px;width: 25%;display: inline-block;margin-bottom: 15px;height: auto;}
+.color-block figure{border: 2px solid #dcdee0;cursor: pointer;width: 100%;height: auto;}
+.color-block.active span{border: 5px solid #bda97f;border-bottom: none;}
+.color-block figcaption{background: #fff;text-align: center;font-size: 15px;text-transform: capitalize;color: #000;padding: 15px 5px 10px;margin-top: 0px;border: 5px solid transparent;border-top: none;}
+.color-block.active figcaption,.color-block.active figure{border-color:#bda97f;}
+.color-block span{display: block;width: 100%;height: 145px;overflow: hidden;}
+.color-block span img{width: 100%;height: 100%;}
+.delete-btn{margin-top: 15px;border-top:2px solid #ccc;}
+.color-list::-webkit-scrollbar{width: 4px;}
+.color-list::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);}
+.color-list::-webkit-scrollbar-thumb{background-color: darkgrey;outline: 1px solid slategrey;}
+@media(max-width:1500px){
+    .color-list{padding: 20px 15px 5px;height: 720px;}
+    .color-block span{height: 115px;}
+    .color-block figcaption{padding: 12px 5px 5px;}
+    .color-content .company-img{height: 283px;}
+    .brand-name-list .form-control{height: 48px;}
+    .btn-default{padding: 12px 10px 8px;}
+    .brand-name-list label{top: 14px;}
+}
+
+@media (max-width:1364px){
+    .add-color, .edit-color{width: 24%;}
+    .color-sec{width: 52%;}
+    .color-block figcaption{font-size: 14px;}
+    .color-block span{height: 95px;}
+    .color-content .company-img{height: 223px;}
+    .brand-name-list label{top: 15px;width: 25px;left: 10px;}
+    .brand-name-list .form-control{height: 46px;padding: 8px 12px 4px 45px;}
+    .btn-default{padding: 10px 5px 6px;font-size: 15px;}
+    .color-list{height: 636px;}
+}
+
+@media (max-width:1200px){
+    .print-icon{width: 25px;}
+    .company-heading h2{padding-left: 40px;}
+    .color-sec{padding: 0;}
+    .color-list{padding: 15px 10px 0;margin: 0 -3px;height: 557px;}
+    .color-block{padding: 0 3px;}
+     .color-block figcaption{font-size: 12px;padding: 12px 3px 3px;}
+    .color-block span{height: 83px;}
+    .color-content .company-img{height: 180px;}
+    .brand-name-list .form-control{height: 42px;padding: 8px 12px 4px 35px;}
+    .brand-name-list label{width: 20px;}
+    .btn-default{font-size: 13px;}
+}
+
+@media(max-width:991px){
+    .color-block{flex-basis: 33.33%;margin-bottom: 10px;}
+    .color-content .company-img{height: 130px;}
+    .brand-name-list .form-control{height: 38px;padding: 8px 4px 4px 30px;}
+    .brand-name-list label{width: 18px;left: 7px;top: 11px;}
+    .btn-default{font-size: 12px;padding: 12px 3px 7px;}
+    .cancel-popup{right: 10px;}
+    .color-list{height: 477px;}
+}

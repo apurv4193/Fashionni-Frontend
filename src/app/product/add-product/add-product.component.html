@@ -1,0 +1,629 @@
+<form [formGroup]="productForm" novalidate>
+    <div class="wrapper">
+        <div class="company-heading product-heading">
+            <span class="megaphone-icon" (click)="publishProduct(1)">
+                <img src="../../../assets/images/megaphone.png" alt="megaphone icon" *ngIf="isAdmin">
+            </span>
+
+            <span class="save-icon" (click)="saveProduct(0)" title="save">
+                <img src="../../../assets/images/save-icon-silhouette.png" alt="save icon">
+            </span>
+        </div>
+        <div class="add-product-sec">
+            <div class="sec-left">
+                <div class="upload-row">
+                    <div class="upload-product-img width-half">
+                        <div class="company-img upload-img">
+                            <span>
+                                <img [src]="productImageSet[0]" alt="img">
+                            </span>
+                            <input *ngIf="isAdmin" type="file" name="pic" (change)="productFileChange($event,0)">
+                        </div>
+                    </div>
+                    <div class="upload-product-img width-half">
+                        <div class="company-img upload-img">
+                            <span>
+                                <img [src]="productImageSet[1]" alt="img">
+                            </span>
+                            <input *ngIf="isAdmin" type="file" name="pic" (change)="productFileChange($event,1)">
+                        </div>
+                    </div>
+                </div>
+                <div class="upload-row">
+                    <div class="width-half">
+                        <div class="product-block-list">
+                            <div class="upload-product-img">
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="productImageSet[2]" alt="img">
+                                    </span>
+                                    <input *ngIf="isAdmin" type="file" name="pic" (change)="productFileChange($event,2)">
+                                </div>
+                            </div>
+                            <div class="upload-product-img">
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="productImageSet[3]" alt="img">
+                                    </span>
+                                    <input *ngIf="isAdmin" type="file" name="pic" (change)="productFileChange($event,3)">
+                                </div>
+                            </div>
+                            <div class="upload-product-img">
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="productImageSet[4]" alt="img">
+                                    </span>
+                                    <input *ngIf="isAdmin" type="file" name="pic" (change)="productFileChange($event,4)">
+                                </div>
+                            </div>
+                            <div class="upload-product-img">
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="productImageSet[5]" alt="img">
+                                    </span>
+                                    <input *ngIf="isAdmin" type="file" name="pic" (change)="productFileChange($event,5)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="width-half">
+                        <div class="category-list">
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='category1'}">
+                                <span>
+                                    <img src="../../../assets/images/list.png" alt="list icon" (click)="openAddEditPage('product/category')">
+                                </span>
+                                <h3>
+                                    <a class="active" href="javascript:void(0)" (click)="showPopup('category1')" title="Category I">{{displayArray.category1 | translate}}</a>
+                                </h3>
+                            </div>
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='category2'}">
+                                <span>
+                                    <img src="../../../assets/images/list.png" alt="list icon" (click)="openAddEditPage('product/category')">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('category2')" title="Category II">{{displayArray.category2 | translate}}</a>
+                                </h3>
+                            </div>
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='category3'}">
+                                <span>
+                                    <img src="../../../assets/images/list.png" alt="list icon" (click)="openAddEditPage('product/category')">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('category3')" title="Category III">{{displayArray.category3 | translate}}</a>
+                                </h3>
+                            </div>
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='category4'}">
+                                <span>
+                                    <img src="../../../assets/images/list.png" alt="list icon" (click)="openAddEditPage('product/category')">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('category4')" title="Category IV">{{displayArray.category4 | translate}}</a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="category-list">
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='brand'}">
+                                <span>
+                                    <img src="../../../assets/images/brand.png" alt="list icon" (click)="openAddEditPageForBrand('product/product-brand')">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('brand')" title="Brand">{{displayArray.brand | translate}}</a>
+                                </h3>
+                            </div>
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='code'}">
+                                <span>
+                                    <img src="../../../assets/images/code.png" alt="list icon">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('code')" title="Code">{{displayArray.code | translate}}</a>
+                                </h3>
+                            </div>
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='color'}">
+                                <span>
+                                    <img src="../../../assets/images/color.png" alt="list icon" (click)="openAddEditPage('product/color')">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('color')" title="Colour">{{displayArray.color | translate}}</a>
+                                </h3>
+                            </div>
+                            <div class="category-block" [ngClass]="{'active':selectedMenu=='material'}">
+                                <span>
+                                    <img src="../../../assets/images/material.png" alt="list icon" (click)="openAddEditPage('product/material')">
+                                </span>
+                                <h3>
+                                    <a href="javascript:void(0)" (click)="showPopup('material')" title="Material">{{displayArray.material | translate}}</a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="upload-row">
+                    <div class="product-detail-list">
+                        <div class="upload-product-img width-half">
+                            <div class="company-block">
+                                <div>
+                                    <figure>
+                                        <div class="company-img upload-img">
+                                            <span>
+                                                <img [src]="brandsOriginalIngoImage" alt="plus icon">
+                                            </span>
+                                            <input *ngIf="isAdmin" type="file" name="pic" (change)="productBrandInfoChange($event)">
+                                        </div>
+                                        <figcaption>{{'Brand Label With Original Information' | translate}}</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-product-img width-half">
+                            <div class="company-block">
+                                <div>
+                                    <figure>
+                                        <div class="company-img upload-img">
+                                            <span>
+                                                <img [src]="washCareMaterialImage" alt="plus icon">
+                                            </span>
+                                            <input *ngIf="isAdmin" type="file" name="pic" (change)="washCareMaterialImageChange($event)">
+                                        </div>
+                                        <figcaption>{{'Wash Care With Material' | translate}}</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-product-img width-half">
+                            <div class="company-block material-detail">
+                                <div class="form-group">
+                                    <textarea class="form-control" formControlName="short_description"></textarea>
+                                    <label>{{'Short Description' | translate}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-product-img width-half">
+                            <div class="company-block material-detail">
+                                <!--<div>
+                                <figure>
+                                    <div class="company-img upload-img">
+                                        <span><img src="../../../assets/images/plus-default.png" alt="plus icon"></span>
+                                        <input type="file" name="pic">
+                                    </div>
+                                    <figcaption>Short Description</figcaption>
+                                </figure>
+                            </div>-->
+                                <div class="form-group">
+                                    <textarea class="form-control" formControlName="material_detail"></textarea>
+                                    <label>{{'Material Details' | translate}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sec-right">
+                <div class="brand-name-list">
+                    <h2>{{'Brand and Name' | translate}}</h2>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-aus></app-flag-aus>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_en">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-china></app-flag-china>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_ch">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-germany></app-flag-germany>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_ge">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-france></app-flag-france>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_fr">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-italy></app-flag-italy>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_it">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-spain></app-flag-spain>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_sp">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-russia></app-flag-russia>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_ru">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-japan></app-flag-japan>
+                        </label>
+                        <input type="text" class="form-control" formControlName="product_name_jp">
+                    </div>
+                </div>
+                <div class="right-content">
+                    <div class="rate-detail">
+                        <div class="rate-sec">
+                            <div class="form-group">
+                                <label>{{'Retail Price' | translate}} *</label>
+                                <input type="number" class="form-control" formControlName="product_retail_price" (input)="calculate()" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Discount Rate' | translate}} * %</label>
+                                <input type="number" class="form-control" formControlName="product_discount_rate" (input)="calculate('rate')" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Discount Amount' | translate}}</label>
+                                <input type="number" class="form-control" formControlName="product_discount_amount" (input)="calculate('amount')" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Outlet Price' | translate}}</label>
+                                <input type="number" class="form-control bg-store" formControlName="product_outlet_price" readonly>
+                            </div>
+                        </div>
+                        <div class="rate-sec">
+                            <div class="form-group">
+                                <label>{{'VAT Rate' | translate}}*</label>
+                                <input type="text" class="form-control" formControlName="product_vat_rate" (input)="calculate()">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'VAT' | translate}}</label>
+                                <input type="number" class="form-control bg-store" formControlName="product_vat" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Outlet Price (exclusive VAT)' | translate}}</label>
+                                <input type="number" class="form-control bg-store" formControlName="product_outlet_price_exclusive_vat" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Fashionni Fees' | translate}}</label>
+                                <input type="number" class="form-control bg-store" formControlName="fashionni_fees" readonly>
+                            </div>
+                        </div>
+                        <div class="rate-sec">
+                            <div class="form-group">
+                                <label>{{'Product Code - Barcode' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="product_code_barcode">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Product Code - Boutique' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="product_code_boutique">
+                            </div>
+                            <div class="form-group">
+                                <label>{{'Product Code - RFID' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="product_code_rfid">
+                            </div>
+                        </div>
+                        <div class="notice-board">
+                            <h2>{{'Notice' | translate}}</h2>
+                            <div class="form-group">
+                                <textarea class="form-control" formControlName="product_notice"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-content" [ngClass]="{'hide':isPriceSectionShown}">
+                        <!--category 1 start-->
+                        <div class="category-sec category-1" *ngIf="popupArray.category1">
+                            <span class="cancel-popup" (click)="showPopup('category1')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="slider-sec">
+                                <ul class="slider-img">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" *ngFor="let image of category_images; let i = index">
+                                        <img [src]="image.file_name">
+                                    </li>
+                                </ul>
+                                <ul class="slider-dots">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" (click)="changeImage(i)" *ngFor="let image of category_images; let i = index">
+                                        <span class="active"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <perfect-scrollbar style="height:275px;">
+                                <div class="option-list">
+                                    <div *ngFor="let cat of categories.category1; let firstCatIndex = index;" class="option-block" (click)="chooseCategory('category1',firstCatIndex,1,cat.id,'category_level1_id')"
+                                        [ngClass]="cat.isSelected">
+                                        {{cat.category_name_en}}
+                                    </div>
+                                </div>
+                            </perfect-scrollbar>
+                        </div>
+                        <!--category 1 end-->
+                        <!--category 2 start-->
+                        <div class="category-sec category-2" *ngIf="popupArray.category2">
+                            <span class="cancel-popup" (click)="showPopup('category2')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="slider-sec">
+                                <ul class="slider-img">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" *ngFor="let image of category_images; let i = index">
+                                        <img [src]="image.file_name">
+                                    </li>
+                                </ul>
+                                <ul class="slider-dots">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" (click)="changeImage(i)" *ngFor="let image of category_images; let i = index">
+                                        <span class="active"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="option-list">
+                                <div *ngFor="let cat of categories.category2; let firstCatIndex = index;" class="option-block" (click)="chooseCategory('category2',firstCatIndex,2,cat.id,'category_level2_id')"
+                                    [ngClass]="cat.isSelected">
+                                    {{cat.category_name_en}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--category 2 end-->
+                        <!--category 3 start-->
+                        <div class="category-sec category-3" *ngIf="popupArray.category3">
+                            <span class="cancel-popup" (click)="showPopup('category3')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="slider-sec">
+                                <ul class="slider-img">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" *ngFor="let image of category_images; let i = index">
+                                        <img [src]="image.file_name">
+                                    </li>
+                                </ul>
+                                <ul class="slider-dots">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" (click)="changeImage(i)" *ngFor="let image of category_images; let i = index">
+                                        <span class="active"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="option-list">
+                                <div *ngFor="let cat of categories.category3; let firstCatIndex = index;" class="option-block" (click)="chooseCategory('category3',firstCatIndex,3,cat.id,'category_level3_id')"
+                                    [ngClass]="cat.isSelected">
+                                    {{cat.category_name_en}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--category 3 end-->
+                        <!--category 4 start-->
+                        <div class="category-sec category-4" *ngIf="popupArray.category4">
+                            <span class="cancel-popup" (click)="showPopup('category4')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="slider-sec">
+                                <ul class="slider-img">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" *ngFor="let image of category_images; let i = index">
+                                        <img [src]="image.file_name">
+                                    </li>
+                                </ul>
+                                <ul class="slider-dots">
+                                    <li [ngClass]="{'active':image.isActive=='active'}" (click)="changeImage(i)" *ngFor="let image of category_images; let i = index">
+                                        <span class="active"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="option-list">
+                                <div *ngFor="let cat of categories.category4; let firstCatIndex = index;" class="option-block" (click)="chooseCategory('category4',firstCatIndex,4,cat.id,'category_level4_id')"
+                                    [ngClass]="cat.isSelected">
+                                    {{cat.category_name_en}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--category 4 end-->
+                        <!-- brand popup start-->
+                        <div class="category-sec" *ngIf="popupArray.brand">
+                            <span class="cancel-popup" (click)="showPopup('brand')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="brand-sec">
+                                <ul class="alphabets-list">
+                                    <li *ngFor="let i of brandFilterAlphaArray" [ngClass]="{'active':selectedChar==i}" (click)="brandFilter(i)">{{i}}</li>
+                                </ul>
+                                <div class="brand-name">
+                                    <ul>
+                                        <li class="active" *ngFor="let brand of brands; let indBrand = index;" (click)="chooseBrand(indBrand)" [ngClass]="brand.isSelected">
+                                            {{brand.brand_name}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- brand popup end-->
+                        <!-- code popup start -->
+                        <div class="category-sec" *ngIf="popupArray.code">
+                            <span class="cancel-popup" (click)="showPopup('code')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="code-sec">
+                                <div class="company-block">
+                                    <div>
+                                        <figure>
+                                            <div class="company-img upload-img">
+                                                <span>
+                                                    <img [src]="codeImage" alt="plus icon">
+                                                </span>
+                                                <input type="file" *ngIf="isAdmin" name="pic" (change)="changeCodeImage($event)">
+                                            </div>
+                                            <figcaption>{{'Image' | translate}}</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="code-text">
+                                    <div class="form-group">
+                                        <textarea class="form-control" formControlName="code_number" placeholder="Commodity manufacturer number scan or type"></textarea>
+                                    </div>
+                                    <!-- <button type="submit" class="btn">Save</button> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- code popup end -->
+                        <!-- color popup start -->
+                        <div class="category-sec" *ngIf="popupArray.color">
+                            <span class="cancel-popup" (click)="showPopup('color')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="color-sec">
+                                <div class="color-list">
+                                    <div class="color-block" *ngFor="let color of colors; let ind = index;" (click)="chooseColor(ind)" [ngClass]="color.isSelected">
+                                        <figure>
+                                            <span>
+                                                <img [src]="color.color_image" [alt]="color.color_name_en">
+                                            </span>
+                                            <figcaption>{{color.color_name_en}}</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- color popup end -->
+                        <!-- material popup -->
+                        <div class="category-sec" *ngIf="popupArray.material">
+                            <span class="cancel-popup" (click)="showPopup('material')">
+                                <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                            </span>
+                            <div class="color-sec material-sec">
+                                <div class="color-list material-list">
+                                    <div class="color-block material-block" *ngFor="let mat of material; let ind = index;" (click)="chooseMaterial(ind)" [ngClass]="mat.isSelected">
+                                        <figure>
+                                            <span>
+                                                <img [src]="mat.material_image" [alt]="mat['material_name_en']">
+                                            </span>
+                                            <figcaption>{{mat['material_name_en']}}</figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- material popup -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-table" *ngIf="productId>0">
+            <div class="company-heading product-heading">
+                <h2>{{'Inventory' | translate}}</h2>
+                <span class="save-icon" (click)="saveProductInventory()" title="save">
+                    <img src="../../assets/images/save-icon-silhouette.png" alt="save icon">
+                </span>
+            </div>
+
+            <form [formGroup]="inventoryForm" class="table-responsive">
+                <table formArrayName="itemRows" class="table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>{{'Fashionni ID' | translate}}</th>
+                            <th>{{'Standard' | translate}}</th>
+                            <th>{{'Size' | translate}}</th>
+                            <th>{{'Quantity' | translate}}</th>
+                            <th>{{'Warehouse' | translate}}</th>
+                            <th>{{'Sold by Boutique' | translate}}</th>
+                            <th>{{'Sold by Fashionni' | translate}}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemrow of inventoryForm['controls']['itemRows']['controls']; let i=index" [formGroupName]="i">
+                            <td>
+                                <input type="text" class="table-input input-disable" formControlName="fashionni_id" disabled="disabled">
+                            </td>
+                            <td>
+                                <input type="text" class="table-input" formControlName="product_standard">
+                            </td>
+                            <td>
+                                <input type="text" class="table-input" formControlName="product_size">
+                            </td>
+                            <td>
+                                <input type="text" class="table-input input-disable" formControlName="product_quantity" disabled>
+                            </td>
+                            <td>
+                                <input type="text" class="table-input" formControlName="product_warehouse">
+                            </td>
+                            <td>
+                                <span class="checkbox">
+                                    <label>
+                                        <input type="checkbox" (change)="soldByInventory(i,1,$event)" [checked]="inventoryForm.value.itemRows[i]['whoIsSellerBoutique']">
+                                        <span class="checker"></span>
+                                    </label>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="checkbox">
+                                    <label>
+                                        <input type="checkbox" (change)="soldByInventory(i,2,$event)" [checked]="inventoryForm.value.itemRows[i]['whoIsSellerSuperAdmin']">
+                                        <span class="checker"></span>
+                                    </label>
+                                </span>
+                            </td>
+                            <td><img (click)="deleteRow(i,inventoryForm.value.itemRows[i]['id'])" src="../../assets/images/cancel-button.png"
+                                alt="cancel" class="delete-row">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="add-row" (click)="addNewRow()">
+                <span>+</span>
+            </div>
+            <button *ngIf="is_next_inventory" (click)="getProductInventory()" class="btn-default">Load more</button>
+
+            <button *ngIf="isAdmin && productId>0" (click)="deleteProduct()" class="btn-default">{{'Delete this product' | translate}}</button>
+        </div>
+
+        <div class="notification-sec">
+            <h2 *ngIf="unReadNotificationList?.length > 0">
+                <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+            </h2>
+            <div class="notification-list">
+                <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" [disabled]="!permission" (change)="readNotification(notification, index)">
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <h2 class="confirm-notification">
+                <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                <span class="visibility" (click)="hideNotification()">
+                    <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+                </span>
+                <span class="visibility" (click)="hideNotification()">
+                    <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+                </span>
+            </h2>
+            <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+                <!-- <h2>
+                    <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                    <span class="visibility">
+                        <img src="../../assets/images/un-visible.png" alt="">
+                    </span>
+                </h2> -->
+                <div *ngIf="hideNotificationFlag">
+                    <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                        <div class="date-block">
+                            <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                            <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                        </div>
+                        <div class="content-block">{{notification.notification_text}}
+                            <span class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked>
+                                    <span class="checker"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

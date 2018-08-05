@@ -1,0 +1,220 @@
+<div class="wrapper">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon">
+            <img src="../../../assets/images/color.png" alt="colour icon">
+        </span>
+        <h2>{{ 'Color' | translate }}</h2>
+        <span class="lock-icon" title="save" (click)="formOpen(isFormOpen)" [ngClass]="{'submit-text' : isFormOpen == false}" class="lock-icon">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <div class="color-content">
+        <div class="add-color">
+            <div class="company-block">
+                <div>
+                    <figure>
+                        <div class="company-img upload-img">
+                            <span>
+                                <img [src]="colorImage" alt="plus icon">
+                            </span>
+                            <input type="file" name="pic" (change)="fileChange($event)" [hidden]="!isFormOpen">
+                        </div>
+                    </figure>
+                </div>
+            </div>
+            <form [formGroup]="colorForm" novalidate>
+                <div class="brand-name-list">
+                    <div class="form-group">
+                        <label>
+                            <app-flag-aus></app-flag-aus>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_en" [ngClass]="{'errorBottom':  colorForm.controls.color_name_en.touched == true && colorForm.controls.color_name_en.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-china></app-flag-china>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_ch" [ngClass]="{'errorBottom':  colorForm.controls.color_name_ch.touched == true && colorForm.controls.color_name_ch.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-germany></app-flag-germany>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_ge" [ngClass]="{'errorBottom':  colorForm.controls.color_name_ge.touched == true && colorForm.controls.color_name_ge.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-france></app-flag-france>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_fr" [ngClass]="{'errorBottom':  colorForm.controls.color_name_fr.touched == true && colorForm.controls.color_name_fr.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-italy></app-flag-italy>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_it" [ngClass]="{'errorBottom': colorForm.controls.color_name_it.touched == true && colorForm.controls.color_name_it.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-spain></app-flag-spain>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_sp" [ngClass]="{'errorBottom': colorForm.controls.color_name_sp.touched == true && colorForm.controls.color_name_sp.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-russia></app-flag-russia>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_ru" [ngClass]="{'errorBottom': colorForm.controls.color_name_ru.touched == true && colorForm.controls.color_name_ru.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-japan></app-flag-japan>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_jp" [ngClass]="{'errorBottom': colorForm.controls.color_name_jp.touched == true && colorForm.controls.color_name_jp.hasError('required')}">
+                    </div>
+                </div>
+                <button type="submit" class="btn-default" [disabled]="!isFormOpen" (click)="colorSave(colorForm)">{{ 'Add New Color' | translate }}</button>
+            </form>
+        </div>
+        <div class="color-sec">
+            <div class="color-list" (scroll)="onWindowScroll($event)" #colorList>
+                <div class="color-block" *ngFor="let data of allData; let i = index;" (click)="getColorById(data.id,i)" [ngClass]="{'active':data.isSelected}">
+                    <figure>
+                        <span *ngIf="data.color_image != '' ">
+                            <img src="{{data.color_image}}" alt="color img">
+                        </span>
+                        <figcaption>{{data.color_name_en}}</figcaption>
+                    </figure>
+                </div>
+
+                <div *ngIf="allData.length==0">
+                    No record found.!
+                </div>
+            </div>
+        </div>
+        <div class="edit-color add-color">
+            <form [formGroup]="colorFormEdit">
+                <span class="cancel-popup" (click)="deleteImage(editId)" *ngIf="editImage != ''">
+                    <img src="../../../assets/images/cancel-button.png" alt="cancel">
+                </span>
+                <div class="company-block">
+                    <div>
+                        <figure>
+                            <div class="company-img upload-img">
+                                <span *ngIf="editImage != ''">
+                                    <img src="{{editImage}}">
+                                </span>
+                                <input *ngIf="deleteFlag" type="file" name="pic" (change)="fileEditChange($event)" [hidden]="!isFormOpen">
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+                <div class="brand-name-list">
+                    <div class="form-group">
+                        <label>
+                            <app-flag-aus></app-flag-aus>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_en" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_en.touched == true && colorFormEdit.controls.color_name_en.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-china></app-flag-china>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_ch" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_ch.touched == true && colorFormEdit.controls.color_name_ch.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-germany></app-flag-germany>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_ge" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_ge.touched == true && colorFormEdit.controls.color_name_ge.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-france></app-flag-france>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_fr" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_fr.touched == true && colorFormEdit.controls.color_name_fr.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-italy></app-flag-italy>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_it" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_it.touched == true && colorFormEdit.controls.color_name_it.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-spain></app-flag-spain>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_sp" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_sp.touched == true && colorFormEdit.controls.color_name_sp.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-russia></app-flag-russia>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_ru" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_ru.touched == true && colorFormEdit.controls.color_name_ru.hasError('required')}">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <app-flag-japan></app-flag-japan>
+                        </label>
+                        <input type="text" class="form-control" formControlName="color_name_jp" [ngClass]="{'errorBottom':  colorFormEdit.controls.color_name_jp.touched == true && colorFormEdit.controls.color_name_jp.hasError('required')}">
+                    </div>
+                </div>
+                <button type="submit" class="btn-default" (click)="editColor(editId)" [disabled]="!editButtonFlag">{{ 'Save Change' | translate }}</button>
+                <button type="button" class="btn-default delete-btn" (click)="deleteColor(editId)">{{ 'Delete' | translate }}</button>
+            </form>
+        </div>
+    </div>
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

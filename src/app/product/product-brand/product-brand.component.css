@@ -1,0 +1,65 @@
+.company-heading h2{text-align: left;padding-left: 50px;}
+.print-icon{top: 8px;}
+.company-heading .lock-icon{color: #000;}
+.width-25{padding: 0 ;width: 25%;display: inline-block;vertical-align: top;}
+.width-75{padding: 0 0 0 15px;width: 75%;display: inline-block;vertical-align: top;margin-left: -4px;}
+.add-brand .company-img span{padding: 0;}
+.btn-default{width: 100%;background: #eee;color: #000;text-transform: capitalize;font-size: 17px;box-shadow: none;margin-top: -5px;padding: 12px 5px 4px;cursor: pointer;border: 2px solid #d6d6d6;}
+.add-brand .form-control{width: 100%;margin-left: 0;border: 2px solid #d6d6d6;text-align: center;height: 48px;}
+.add-brand .company-img{border: none;height: 300px;}
+.form-group{margin-bottom: 0;}
+.company-block > div{border-color: #d6d6d6;border-bottom: none;}
+.add-brand-form{margin-bottom: 20px;}
+.alphabets-list{margin-right: -5px;margin-bottom: 20px;}
+.alphabets-list li{width: 46px;height: 46px;background: #fff;border: 2px solid #dcdee0;color: #000;text-align: center;padding: 5px;text-transform: uppercase;display: inline-block;margin-right: 5px;margin-bottom: 8px;font-size: 18px;line-height: 2.2;}
+.alphabets-list li.active,.alphabets-list li:hover,.brand-name li:hover, .brand-name li.active{background:#BDA97F; }
+.brand-name ul{padding: 0;list-style-type: none;}
+.brand-name li{display: inline-block;font-size: 17px;padding: 13px 10px 5px;border: 1px solid #dcdee0;margin-bottom: 8px;margin-right: 5px;background: #fff;}
+.brand-no{width: 66.237%;display: inline-block;vertical-align: top;padding-right: 15px;}
+.edit-brand{width: 33.763%;margin-left: -4px;display: inline-block;position: relative;}
+.boutique-brand h2, .brand-no h2{text-align: center;color: #000;font-size: 19px;background: #eee;border: 2px solid #d6d6d6;padding: 17px 15px 10px;border-bottom: none;}
+.brand-no h2{border: 2px solid #d6d6d6;}
+.boutique-brand ul{list-style-type: none;}
+.boutique-brand li{width: 100%;padding:20px 10px 10px;border: 2px solid #d6d6d6;border-bottom: none;font-size: 16px;cursor: pointer;text-transform: capitalize;}
+.boutique-brand li:last-child{border-bottom: 2px solid #d6d6d6;}
+.boutique-brand{margin-bottom: 20px;}
+.boutique-brand li:hover, .boutique-brand li.active{background: #BDA97F;border-color: #BDA97F;}
+.brand-count{background: #eee;text-align: center;border: 2px solid #eee;color:#000;font-size: 40px;position: relative;width: 100%;height: 221px;margin-bottom: 20px;line-height: 1;}
+.brand-count span{position: absolute;width: 100%;top: 45%;transform: translateX(-50%);}
+.cancel-popup{right: 10px;top: 10px;}
+.brand-name ul{background: #eee;padding:20px 20px 13px;margin-bottom: 20px;}
+.delete-btn{margin-top: 15px;border-top:2px solid #ccc;}
+@media (max-width:1900px){
+    .alphabets-list{margin-right: -3px;}
+    .alphabets-list li{width: 33.5px;height: 33.5px;margin-right: 3px;font-size: 14px;line-height: 1.5;}
+    .add-brand .company-img{height: 276px;}
+}
+@media (max-width:1500px){
+    .brand-name li,.boutique-brand li{font-size: 14px;}
+    .boutique-brand h2, .brand-no h2{font-size: 17px;}
+    .alphabets-list li{height: 31.5px;width: 31.5px;}
+}
+
+@media (max-width:1364px){
+    .alphabets-list li{height: 31px;width: 31px;}
+    .brand-count{height: 189px;}
+}
+
+@media (max-width:1200px){
+    .add-brand .company-img{height: 225px;}
+    .add-brand .form-control{height: 44px;}
+    .btn-default{font-size: 14px;padding: 13px 5px 4px;}
+    .boutique-brand h2, .brand-no h2{font-size: 15px;}
+    .brand-count{height: 140px;font-size: 30px;}
+    .alphabets-list li{height: 29.5px;width: 29.5px;margin-bottom: 6px;}
+}
+
+@media (max-width: 991px){
+    .add-brand .company-img{height: 160px;}
+    .btn-default{font-size: 13px;}
+    .boutique-brand h2, .brand-no h2{font-size: 13px;padding: 14px 6px 8px;}
+    .brand-name li, .boutique-brand li{font-size: 12px;padding: 15px 6px 6px;}
+    .brand-name ul{padding: 10px 10px 3px;}
+    .brand-count{height: 100px;font-size: 20px;margin-bottom: 10px;}
+    .alphabets-list li{height: 26.2px;width: 26.2px;margin-bottom: 5px;}
+}

@@ -1,0 +1,12 @@
+<header>
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" (click)="goToHome()" href="javascript:void(0)" title="Fashionni"><img src="../../assets/images/header-logo.png" alt="Fashionni" /></a>
+            </div>
+            <div class="logout-btn" *ngIf="isLoggedIn" (click)="logout()">
+                <span title="Logout"><img src="../../assets/images/stand-by.png" alt="Logout"></span>
+            </div>
+        </div>
+    </nav>
+</header>

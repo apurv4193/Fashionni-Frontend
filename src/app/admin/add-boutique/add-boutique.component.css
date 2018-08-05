@@ -1,0 +1,91 @@
+.company-block > div{display: block;height: 100%;border: 1px solid #ccc;background: #eee;font-family: "Bangla mn";}
+.company-block figure{position: relative;margin-bottom: 0;background: #fff;margin: 0;}
+.company-img{height: 216px;width: 100%;position: relative;border-bottom: 1px solid #ccc;cursor: pointer;}
+.company-img span{position: absolute;top: 50%;display: block;transform: translatey(-50%);width: 100%;padding:0;height: 100%;}
+.company-img img{max-width: 100%;padding: 0px;width: 100%;height: 100%;}
+.company-block a:hover{text-decoration: none;}
+.company-block figcaption{color: #000;padding: 15px 15px 10px;font-size: 17px;background: #eee;text-transform: capitalize;font-weight: 700;position: relative;}
+.company-block figcaption.clone-icon{padding: 15px 45px 10px;}
+
+.company-block figcaption span{position: absolute;right: 11px;top: 8px;background: #fff;width: 30px;height: 30px;color: #000;line-height: 40px;display: inline-block;text-align: center;cursor: pointer;}
+.delete-icon{left:11px;right: 0;}
+.form-block{margin-bottom: 20px;}
+.col-sm-6{padding: 0 8px;}
+.row{margin: 0 -8px;}
+.width-20{padding: 0 15px 0 0;width: 15%;}
+.width-80{padding: 0 0 0 5px;width: 85%;}
+.col-sm-12{padding: 0;}
+.search-icon{display: none !important;}
+
+/*---form css---*/
+.form-group {margin-bottom: 24px;}
+.form-control {width: 83.5%;height: 48px;padding: 12px 12px 6px;font-size: 14px;line-height: 1.42857143;color: #000;background-color: #fff; background-image: none;border: 1px solid #ccc;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);box-shadow: inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;margin-left: -4px;font-size: 14px;}
+.form-group label{display: inline-block;width: 219px;vertical-align: top;height:48px;border: 1px solid #ccc;background: #eee;font-size: 14px;padding:12px 12px 6px;line-height: 1.9;}
+.col-sm-6 .form-control{width: 66.5%;}
+.upload-img input[type=file]{position: absolute;width: 100%;height: 100%;opacity: 0;top: 0;left: 0;cursor: pointer;}
+/*.form-block-copy .company-img{height: 176px;}*/
+/*------*/
+
+.full_width_label{width: 98% !important;border-right: 1px solid #ccc !important;}
+.tweleve_label{width: 98.8% !important;border-right: 1px solid #ccc !important;}
+.label_padding{padding: 0 6px;}
+
+@media (max-width:1900px){
+    .form-group label{width: 168px;height: 40px;}
+    .form-control{width:82.7%;height: 40px;}
+    .col-sm-6 .form-control{width: 64.9%;}
+    .company-img{height: 171px;}
+    .form-group{margin-bottom: 19px;}
+    .full_width_label{width: 97% !important;}
+    .tweleve_label{width: 98.5% !important;}
+}
+
+@media (max-width:1500px){
+    .form-group label{width: 170px;height: 37px;padding: 9px 12px 6px;}
+    .col-sm-6 .form-control{width: 62.5%;}
+    .form-control{width: 81.6%;height: 37px;}
+    .form-block-copy .company-img,.company-img{height: 147px;}
+    .company-block figcaption.clone-icon{padding: 12px 40px 6px;}
+    .form-group {margin-bottom: 13px;}
+    .full_width_label{width: 99% !important;}
+    .tweleve_label{width: 99.1% !important;}
+}
+
+@media (max-width:1364px){
+    .col-sm-6 .form-control{width:53.7%;}
+    .form-control{width: 77.4%;height: 40px;}
+    .form-group label{height: 40px;}
+    .width-20{width: 20%;}
+    .width-80{width: 80%;}
+    .form-block-copy .company-img,.company-img{height: 170px;}
+    .form-group {margin-bottom: 18px;}
+    .company-block figcaption.clone-icon{padding: 15px 45px 6px;}
+}
+
+@media (max-width:1200px){
+    .form-group label{width: 150px;font-size: 12px;height:34px;}
+    .form-control{font-size: 12px;height:34px;width: 74.1%;}
+    .col-sm-6 .form-control{width: 47%;}
+    .form-block-copy .company-img,.company-img{height: 133px;}
+    .form-group{margin-bottom: 11px;}
+    .company-block figcaption{font-size: 14px;}
+    .form-block{margin-bottom: 10px;}
+    .company-block figcaption.clone-icon {padding: 12px 38px 6px;}
+    .company-block figcaption{padding: 12px 6px 6px}
+}
+
+@media (max-width:991px){
+    
+    .form-group label{width: 128px;height:30px;padding: 9px 6px 4px;font-size:11px;}
+    .form-control{height:30px;width: 71.5%;padding: 9px 6px 4px;font-size:11px;}
+    .width-20{padding-right: 10px;}
+    .col-sm-6 .form-control{width: 40.7%;}
+    .company-block figcaption{font-size: 11px;padding:12px 6px 6px;}
+    .company-block figcaption.clone-icon{padding: 12px 28px 6px;}
+    /*.company-img{height: 180px;}*/
+    .company-block figcaption span{height: 22px;width: 22px;top: 3px;right: 5px;line-height: 27px;}
+    .form-group{margin-bottom: 4px;}
+    /*.form-block-copy .company-img{height: 136px;}*/
+    .form-block-copy .company-img,.company-img{height: 99px;}
+}
+

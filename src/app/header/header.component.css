@@ -1,0 +1,18 @@
+.navbar{background: #252531;padding: 1.313rem 1rem 1rem;z-index: 999;position: fixed;top: 0;width: 100%;}
+.navbar-header{float: left;}
+.navbar-brand img{max-width: 100%;}
+.navbar-brand{display: inline-block;}
+.logout-btn{float: right;width:  30px;margin-right: 6px;cursor: pointer;}
+.logout-btn span{display:block;}
+
+@media (max-width:1500px){
+    .navbar{padding: 1.1rem 1rem 0.901rem;}
+}
+@media (max-width:1200px){
+    .navbar{padding: 15px 1rem 8px;}
+}
+@media (max-width:991px){
+   /* .navbar{padding:21px 20px;}*/
+    .navbar-brand{max-width: 160px;}
+    .logout-btn{width: 20px}
+}

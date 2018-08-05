@@ -1,0 +1,24 @@
+<aside class="no-gutters">
+    <div class="sidebar">
+        <div class="aside-heading">
+            <h2 (click)="openProductListing()">Messages</h2>
+        </div>
+        <div class="search-bar">
+            <div class="form-group">
+                <input type="text" class="form-control search-feild" placeholder="Search" [(ngModel)]="searchObjectForUser.search_key">
+                <a class="search-btn" (click)="search()" title="search"></a>
+            </div>
+        </div>
+        <!-- <perfect-scrollbar style="height: 730px;"> -->
+       <div>
+            <ul class="boutique-list" (scroll)="onWindowScroll($event)" #userList>
+               <li></li>
+                <li [class]="user.selected==true?'active':''" *ngFor="let user of userArray; let i = index;"><a href="javascript:void(0)" (click)="joinChat(user, i)"><span class="img-sec"><img src="../../assets/images/chat-img.png" alt="chat img"></span> <span class="sidebar-content">
+                    {{user.user_name}} <strong class="person-name"> {{user.company_name}} </strong></span></a>
+                </li>
+            </ul>
+            </div>
+        <!-- </perfect-scrollbar> -->
+    </div>
+        <div class="add-chat" (click)="addChatUser()">+</div>
+</aside>

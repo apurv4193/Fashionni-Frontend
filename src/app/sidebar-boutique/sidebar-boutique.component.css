@@ -1,0 +1,32 @@
+.no-gutter-right{padding-right: 0;}
+aside{background: #ECE7D0;padding:72px 0;width: 300px;height: 100%;position: fixed;top: 0;z-index: 99;left: 0;}
+.aside-heading{border: 1px solid #BDA97F;border-top: 14px solid #BDA97F;border-bottom: 14px solid #BDA97F;padding:20px 15px;text-transform: capitalize;text-align: center;color: #000;border-right: 2px solid #bda97f;}
+.aside-heading h2{margin-bottom: 0;}
+.boutique-list{padding: 0;list-style-type: none;margin: 0;}
+.boutique-list li{display: block;}
+.boutique-list li:last-child{border-bottom: 2px solid #bda97f;}
+.boutique-list li a{display: block;padding: 15px 15px 7px 15px;text-transform: capitalize;color: #000;
+    border: 1px solid #bda97f;transition:0.5s all ease-out;-webkit-transition:0.5s all ease-out;
+    -moz-transition:0.5s all ease-out;-ms-transition:0.5s all ease-out;-o-transition:0.5s all ease-out;
+    border-right: 2px solid #bda97f;font-weight: 700;font-family: "bangla mn";font-size: 14px;
+    text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.boutique-list li a:hover, .boutique-list li.active a{background: #252531;color: #BDA97F;}
+
+@media (max-width:1500px){
+    .aside-heading h2{font-size: 1.5rem;}
+    aside{padding: 67px 0;width: 225px;}
+}
+@media(max-width:1200px){
+    .aside-heading h2{font-size: 20px;}
+    .aside-heading{border-top: 10px solid #BDA97F;border-bottom: 10px solid #BDA97F;padding: 15px 10px;}
+    .boutique-list li a{font-size: 14px;padding: 15px 10px;}
+    aside{padding: 58px 0;}
+    aside{width: 230px;}
+    
+}
+@media (max-width:991px){
+    .aside-heading h2{font-size: 20px;}
+    aside{width: 170px; padding:49px 0 46px;}
+    .boutique-list li a{font-size: 12px;}
+    
+}

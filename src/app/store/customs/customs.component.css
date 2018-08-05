@@ -1,0 +1,48 @@
+.form-group label{width:18%;}
+.width-half label{width:36.467%;}
+.form-control{width: 82%;}
+.width-half .form-control{width: 63.533%;}
+.width-large label{width: 55%;}
+.width-large .form-control{width: 45%;}
+.company-block > div {border-color: #dcdee0;}
+.company-img{border-color: #dcdee0;cursor: auto;height: 216.94px;}
+.company-block figcaption{padding: 14px 15px 6px;font-size: 16px;}
+.confirm-notification h2{margin-bottom: 0;}
+@media(max-width:1900px){
+    .company-img{height: 171.5px;}
+    .company-block figcaption{padding:12px 15px 4px;}
+}
+@media (max-width:1500px){
+    .form-group label{width:22%;}
+    .form-control{width: 78%;}
+    .width-half label{width:44.93%;}
+    .width-half .form-control{width: 55.07%;}
+    .width-large label{width: 66%;}
+    .width-large .form-control{width: 34%;}
+    .company-img{height: 147.64px;}
+}
+
+@media (max-width:1364px){
+    .form-group label{width:27%;}
+    .form-control{width: 73%;}
+    .width-half label{width:55.365%;}
+    .width-half .form-control{width: 44.635%;}
+    .width-large label{width:78%;}
+    .width-large .form-control{width: 22%;}
+    .company-img{height: 170px;}
+    .company-block figcaption{padding:13px 15px 4px;}
+}
+
+@media (max-width:1200px){
+    .company-block figcaption{padding: 11px 12px 4px;font-size: 14px;}
+    .company-img{height: 133.8px;}
+}
+@media (max-width:991px){
+    .company-img{height: 99.5px;}
+    .form-group label{width:31%;}
+    .form-control{width: 69%;}
+    .width-half label{width:64.45%;}
+    .width-half .form-control{width: 35.55%;}
+    .width-large label{width:64%;height: 49px;}
+    .width-large .form-control{width: 36%;height: 49px;}
+}

@@ -1,0 +1,29 @@
+<footer class="footer-sec" [ngClass]="{'admin-footer':isLoggedIn == true && isAdmin == true, 'store-footer':isLoggedIn == true && isAdmin == false}">
+    <ul class="foo-nav">
+        <li class="language">
+            <a title="Language" data-toggle="dropdown" (click)="addClass()" class="dropdown">
+                <i class="fa fa-cogs"></i>
+            </a>
+            <ul class="language-list dropdown-menu">
+                <li *ngFor="let data of allLengData; let i = index;">
+                        <a (click)="langSelect(data.slug)" class="languageClass {{data.slug}}" title="{{data.name}}">{{data.name}}</a>
+                </li>
+            </ul>
+        </li>
+        <li [ngClass]="{'active' : isBoutique == true}">
+            <a href="javascript:void(0)" title="{{ 'Boutique' | translate }}" [routerLink]="routerLinks?.boutique">{{ 'Boutique' | translate }}</a>
+        </li>
+        <li [ngClass]="{'active' : isProduct == true}">
+            <a href="javascript:void(0)" title="{{ 'Product' | translate}}" [routerLink]="routerLinks?.product">{{ 'Product' | translate}}</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" title="{{ 'Report' | translate }}">{{ 'Report' | translate }}</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" title="{{ 'Order' | translate }}">{{ 'Order' | translate }}</a>
+        </li>
+        <li [ngClass]="{'active' : isMessage == true}">
+            <a href="javascript:void(0)" title="{{ 'Message' | translate }}" [routerLink]="routerLinks?.messages">{{ 'Message' | translate }}</a>
+        </li>
+    </ul>
+</footer>

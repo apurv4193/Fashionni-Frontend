@@ -1,0 +1,151 @@
+<div class="wrapper">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon">
+            <img src="../../../assets/images/brand.png" alt="brand icon">
+        </span>
+        <h2>{{'Brand' | translate}}</h2>
+        <span class="lock-icon" title="save" class="lock-icon" (click)="formOpen(isFormOpen)" [ngClass]="{'submit-text' : isFormOpen == false}"
+            class="lock-icon">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <div class="width-25">
+        <div class="add-brand">
+            <form [formGroup]="saveBrandForm">
+                <div class="company-block">
+                    <div>
+                        <figure>
+                            <div class="company-img upload-img">
+                                <span>
+                                    <img src="{{brandImage}}">
+                                </span>
+                                <input type="file" name="pic" (change)="fileChange($event)" [hidden]="!isFormOpen">
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+                <div class="add-brand-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="brandName" (input)="searchBrand()">
+                    </div>
+                    <button type="submit" class="btn-default" [disabled]='!isFormOpen' (click)="saveBrand(saveBrandForm)" title="Add New Brand">{{'Add New Brand' | translate}}</button>
+                </div>
+                <div class="boutique-brand">
+                    <h2>{{'Brands in Boutique' | translate}}</h2>
+                    <ul>
+                        <li (click)="searchBrandByBoutique(brand)" *ngFor="let brand of boutiqueBrands" [ngClass]="{'active' : brand.isSelected}">
+                            {{brand.brand_name}}
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="width-75">
+        <div class="brand-no">
+            <h2>{{'Brands in Fashionni' | translate}}</h2>
+            <div class="brand-count">
+                <span>
+                    <strong>{{totalBrands}}</strong>
+                </span>
+            </div>
+            <ul class="alphabets-list">
+                <li (click)="sortBrandByAlpha(item)" *ngFor="let item of sortArray" [ngClass]="{'active': sortBrand == item}">
+                    {{item}}
+                </li>
+            </ul>
+        </div>
+        <div class="add-brand edit-brand">
+            <form [formGroup]='editBrandForm'>
+                <span class="cancel-popup" (click)="deleteImage(brandId)" *ngIf=" editBrandImage != null ">
+                    <img src="../../../assets/images/cancel-button-light.png" alt="cancel">
+                </span>
+                <div class="company-block">
+                    <div>
+                        <figure>
+                            <div class="company-img upload-img">
+                                <span *ngIf= "editBrandImage">
+                                    <img src="{{editBrandImage}}">
+                                </span>
+                                <input type="file" name="pic" (change)="fileChangeEdit($event)" [hidden]="!editFlag">
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+                <div class="add-brand-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="brandName">
+                    </div>
+                    <button type="submit" class="btn-default" title="Save Change" [disabled]="!editFlag" (click)="updateBrand(brandId)">{{'Save Change' | translate}}</button>
+                    <button type="button" class="btn-default delete-btn" title="Delete" (click)="deleteBrand(brandId)">{{'Delete' | translate}}</button>
+                </div>
+            </form>
+        </div>
+        <div class="brand-name">
+            <ul *ngFor="let brand of (allBrands | toArray)" [hidden]="brand['value']?.length == 0">
+                <li (click)="editBrands(brand['key'], ind)" *ngFor="let item of brand['value']; let ind = index; " [ngClass]="{'active' : item.isSelected}">
+                    {{item.brand_name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                    <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                    <span class="visibility">
+                        <img src="../../assets/images/un-visible.png" alt="">
+                    </span>
+                </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

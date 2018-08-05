@@ -1,0 +1,16 @@
+<aside class="no-gutters">
+	<div class="sidebar">
+		<div class="aside-heading">
+			<h2 (click)="openProductListing()">{{'Product' | translate}}</h2>
+		</div>
+		<perfect-scrollbar style="height: 100vh;">
+			<ul class="boutique-list">
+				<li *ngFor="let boutique of boutiqueList;let ind = index;" [ngClass]="{active:boutique.isSelected}">
+					<a href="javascript:void(0)" (click)="addBoutiqueIdToFilter(boutique, ind)">
+						{{boutique['company_unique_id']}} - {{boutique['company_name']}}
+					</a>
+				</li>
+			</ul>
+		</perfect-scrollbar>
+	</div>
+</aside>

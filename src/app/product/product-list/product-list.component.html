@@ -1,0 +1,98 @@
+<div class="wrapper">
+    <div class="filter-sec">
+        <div class="filter-block">
+            <div class="form-group custom-select">
+                <select (change)="categoryFilter(2)" class="form-control" [(ngModel)]="productFilterObject.category_1_id">
+                    <option value="">ALL</option>
+                    <option *ngFor="let cat of categories['category1']" [value]="cat['id']">
+                        {{cat['category_name_en']}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-block">
+            <div class="form-group custom-select">
+                <select (change)="categoryFilter(3)" class="form-control" [(ngModel)]="productFilterObject.category_2_id">
+                    <option value="">ALL</option>
+                    <option *ngFor="let cat of categories['category2']" [value]="cat['id']">
+                        {{cat['category_name_en']}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-block">
+            <div class="form-group custom-select">
+                <select (change)="categoryFilter(0)" class="form-control" [(ngModel)]="productFilterObject.category_3_id">
+                    <option value="">ALL</option>
+                    <option *ngFor="let cat of categories['category3']" [value]="cat['id']">
+                        {{cat['category_name_en']}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-block" *ngIf="isAdmin">
+            <div class="form-group custom-select">
+                <select class="form-control" (change)="resetFilter()" [(ngModel)]="productFilterObject.brand_id">
+                    <option value="">ALL</option>
+                    <option [value]="brand.id" *ngFor="let brand of brands">{{brand['brand_name']}}</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filter-block" *ngIf="!isAdmin">
+            <div class="form-group custom-select">
+                <select class="form-control" (change)="resetFilter()" [(ngModel)]="productFilterObject.date">
+                    <option value="">Date</option>
+                    <option value="last-week">Last Week</option>
+                    <option value="last-month">Last Month</option>
+                    <option value="last-15-days">Last 15 Days</option>
+                    <option value="last-3-months">Last 3 Months</option>
+                    <option value="last-6-months">Last 6 Months</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="filter-block">
+            <div class="form-group">
+                <input type="text" class="form-control search-feild" [(ngModel)]="productFilterObject.search_text">
+                <a (click)="resetFilter()" class="search-btn" title="search"></a>
+            </div>
+        </div>
+    </div>
+    <!-- product-list-->
+    <div class="product-list">
+        <div class="product-block" *ngIf="productFilterObject.company_id>0 && isAdmin">
+            <div class="product-img" (click)="redirect('MA==', companyIdCoded)">
+                <img src="../../../assets/images/plus-default.png" alt="product image">
+            </div>
+        </div>
+        <div class="product-block" *ngFor="let product of allProducts; let ind = index" (click)="redirect(product.id,product.company_id)">
+            <div class="product-content" [ngClass]="{'product-stockout':product.out_of_stock==0}">
+            <!-- <div class="product-content product-stockout"> -->
+              <span class="new-notification" [ngStyle]="{background:product.edit_status_color_code}"></span>
+               <ul class="flag-list">
+                   <li class="australia"><app-flag-aus *ngIf="product.product_name_en==''"></app-flag-aus></li>
+                   <li class="china"><app-flag-china *ngIf="product.product_name_ch==''"></app-flag-china></li>
+                   <li class="germany"><app-flag-germany *ngIf="product.product_name_ge==''"></app-flag-germany></li>
+                   <li class="france"><app-flag-france *ngIf="product.product_name_fr==''"></app-flag-france></li>
+                   <li class="italy"><app-flag-italy *ngIf="product.product_name_it==''"></app-flag-italy></li>
+                   <li class="spain"><app-flag-spain *ngIf="product.product_name_sp==''"></app-flag-spain></li>
+                   <li class="russia"><app-flag-russia *ngIf="product.product_name_ru==''"></app-flag-russia></li>
+                   <li class="japan"><app-flag-japan *ngIf="product.product_name_jp==''"></app-flag-japan></li>
+               </ul>
+                <div class="product-img">
+                    <img *ngIf="product.bannerImage!=''" [src]="product.bannerImage">
+                </div>
+                <ul class="image-list">
+                    <li class="img-1"><span *ngIf="!product.images[1]" class=""></span></li>
+                    <li class="img-2"><span *ngIf="!product.images[2]" class=""></span></li>
+                    <li class="img-3"><span *ngIf="!product.images[3]" class=""></span></li>
+                    <li class="img-4"><span *ngIf="!product.images[4]" class=""></span></li>
+                    <li class="img-5"><span *ngIf="!product.images[5]" class=""></span></li>
+                    <li class="img-6"><span *ngIf="!product.images[6]" class=""></span></li>
+                </ul>
+                <div class="stockout" *ngIf="product.out_of_stock==0">Out of stock</div>
+            </div>
+        </div>
+    <!-- product-list-->
+</div>

@@ -1,0 +1,268 @@
+<div class="wrapper" [ngClass]="popupFlag==true?'newchat-popup':''">
+    <!--<div class="company-heading bg-offwhite">
+		<h2>Messages</h2>
+	</div>-->
+    <div class="clearfix">
+        <div class="chat-screen clearfix">
+            <div class="chat-content" id="chat-content" (scroll)="onWindowScroll($event)" #chatList>
+                <div *ngFor="let msg of messages | toArray">
+                    <div class="chat-date">
+                        <span>{{msg['key']}}</span>
+                    </div>
+
+                    <div class="chat-block clearfix" *ngFor="let ms of msg['value']">
+                        <div *ngIf="ms.text['type']=='text'" [ngClass]="ms.text['sender']==logged_in_id?'receiver-sec':'sender-sec'">
+                            <div class="receiver-img" *ngIf="ms.text['sender']!=logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                            <div class="message-block">
+                                <div [ngClass]="ms.text['sender']==logged_in_id?'receiver-msg':'sender-msg'" *ngIf="ms.text['type']=='text'">{{ms.text['text']}}</div>
+                                <div class="chat-time">{{ms.text['time']}}</div>
+                            </div>
+                            <div class="sender-img" *ngIf="ms.text['sender']==logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                        </div>
+
+                        <div *ngIf="ms.text['type']=='image'" [ngClass]="ms.text['sender']==logged_in_id?'receiver-sec':'sender-sec'">
+                            <div class="receiver-img" *ngIf="ms.text['sender']!=logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                            <div class="message-block">
+                                <div [ngClass]="ms.text['sender']==logged_in_id?'receiver-msg':'sender-msg'" *ngIf="ms.text['type']=='text'">{{ms.text['text']}}</div>
+                                <img *ngIf="ms.text['type']=='image'" [src]="ms.text['url']" />
+                                <div class="chat-time">{{ms.text['time']}}</div>
+                            </div>
+                            <div class="sender-img" *ngIf="ms.text['sender']==logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                        </div>
+
+                        <div *ngIf="ms.text['type']=='document'" [ngClass]="ms.text['sender']==logged_in_id?'receiver-sec':'sender-sec'">
+                            <div class="receiver-img" *ngIf="ms.text['sender']!=logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                            <div class="message-block">
+                                <div [ngClass]="ms.text['sender']==logged_in_id?'receiver-msg':'sender-msg'">
+                                    <div class="pdf-block">
+                                        <div class="pdf-img">
+                                            <img src="../../../assets/images/pdf-icon.png" class="pdf icon">
+                                        </div>
+                                        <div class="pdf-name">
+                                            <span>{{ms.text['text']}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-time">{{ms.text['time']}}</div>
+                            </div>
+                            <div class="sender-img" *ngIf="ms.text['sender']==logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                        </div>
+
+                        <div *ngIf="ms.text['type']=='audio'" [ngClass]="ms.text['sender']==logged_in_id?'receiver-sec':'sender-sec'">
+                            <div class="receiver-img" *ngIf="ms.text['sender']!=logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                            <div class="message-block">
+                                <div class="sender-msg"><img src="../../../assets//images/audio-icon.png" alt="audio icon" class="audio-icon"><span class="pull-right duration">45''</span></div>                                
+                                <div class="chat-time">{{ms.text['time']}}</div>
+                            </div>
+                            <div class="sender-img" *ngIf="ms.text['sender']==logged_in_id">
+                                <img src="../../../assets/images/chat-img.png" alt="chat img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="chat-block clearfix">
+                    <div class="receiver-sec">
+                        <div class="message-block">
+                            <div class="receiver-msg">One second please</div>
+                            <div class="chat-time">9:00 PM</div>
+                        </div>
+                        <div class="receiver-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="sender-sec">
+                        <div class="sender-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                        <div class="message-block">
+                            <div class="sender-msg">Should i sign them and send original to you? Where should i send to? Is your old address still working.</div>
+                            <div class="chat-time">9:02 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="receiver-sec">
+                        <div class="message-block">
+                            <div class="receiver-msg">
+                                <div class="pdf-block">
+                                    <div class="pdf-img">
+                                        <img src="../../../assets/images/pdf-icon.png" class="pdf icon">
+                                    </div>
+                                    <div class="pdf-name">
+                                        <span>SKM_C22718022615202.pdf</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-time">9:04 PM</div>
+                        </div>
+                        <div class="receiver-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="sender-sec">
+                        <div class="sender-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                        <div class="message-block">
+                            <div class="sender-msg"><img src="../../../assets//images/audio-icon.png" alt="audio icon" class="audio-icon"><span class="pull-right duration">45''</span></div>
+                            <div class="chat-time">9:06 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="receiver-sec">
+                        <div class="message-block">
+                            <div class="receiver-msg">
+                                <div class="pdf-block">
+                                    <div class="pdf-img">
+                                        <img src="../../../assets/images/pdf-icon.png" class="pdf icon">
+                                    </div>
+                                    <div class="pdf-name">
+                                        <span>SKM_C22718022615202.pdf</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-time">9:08 PM</div>
+                        </div>
+                        <div class="receiver-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="sender-sec">
+                        <div class="sender-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                        <div class="message-block">
+                            <div class="sender-msg"><img src="../../../assets//images/audio-icon.png" alt="audio icon" class="audio-icon"><span class="pull-right duration">45''</span></div>
+                            <div class="chat-time">9:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="sender-sec">
+                        <div class="sender-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                        <div class="message-block">
+                            <div class="sender-msg"><img src="../../../assets//images/audio-icon.png" alt="audio icon" class="audio-icon"><span class="pull-right duration">45''</span></div>
+                            <div class="chat-time">9:12 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="receiver-sec">
+                        <div class="message-block">
+                            <div class="receiver-msg">
+                                <div class="pdf-block">
+                                    <div class="pdf-img">
+                                        <img src="../../../assets/images/pdf-icon.png" class="pdf icon">
+                                    </div>
+                                    <div class="pdf-name">
+                                        <span>SKM_C22718022615202.pdf</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-time">9:14 PM</div>
+                        </div>
+                        <div class="receiver-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                    </div>
+                </div>
+                <div class="chat-block clearfix">
+                    <div class="sender-sec">
+                        <div class="sender-img"><img src="../../../assets/images/chat-img.png" alt="chat img"></div>
+                        <div class="message-block">
+                            <div class="sender-msg"><img src="../../../assets//images/audio-icon.png" alt="audio icon" class="audio-icon"><span class="pull-right duration">45''</span></div>
+                            <div class="chat-time">9:16 PM</div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="chat-form">
+                <div class="chat-function">
+                    <ul>
+                        <li title="Upload image">
+                            <img src="../../../assets/images/camera.png" alt="camera icon">
+                            <input (change)="startUpload($event,0)" accept=".png, .jpg, .jpeg" type="file">
+                        </li>
+                        <li title="Upload document">
+                            <img src="../../../assets/images/document-icon.png" alt="document icon">
+                            <input (change)="startUpload($event,0)" accept=".doc, .docx, .pdf, .xls, .xlsx" type="file">
+                        </li>
+                        <li title="Audio file">
+                            <img src="../../../assets/images/audio-icon.png" alt="audio icon">
+                            <input type="file">
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat-textarea">
+                    <div class="form-group">
+                        <form (ngSubmit)="sendMessage()">
+                            <input type="text" placeholder="Write your message" class="form-control" [(ngModel)]="txtMessage" (keydown)="enterToSend($event)" name="txtMessage">
+                        </form>
+                    </div>
+                    <button type="submit" class="send-btn" title="Send" (click)="sendMessage()">
+                        <img src="../../../assets/images/send.png" alt="send icon">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <perfect-scrollbar style="height: 100px;width: 100px;">
+            <div class="document-box">
+                <h2>Document Box</h2>
+                <ul class="attachment-list">
+                    <li *ngFor="let doc of recentDocuments">
+                        <div class="pdf-block">
+                            <div class="del-img" (click)="deleteDocument(doc)">
+                                <img alt="Delete" src="../../assets/images/close.png" title="delete">
+                            </div>
+                            <div class="pdf-img">
+                                <img *ngIf="doc.type=='document'" src="../../../assets/images/pdf-icon.png" class="pdf icon">
+                                <img *ngIf="doc.type=='image'" [src]="doc.url" class="pdf icon">
+                            </div>
+                            <div class="pdf-name">
+                                <span>
+                                    <a target="_blank" [href]="doc.url">{{doc.text}}</a>
+                                </span>
+                                <span class="chat-time">{{doc.date}}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </perfect-scrollbar>
+    </div>
+    <div class="add-newchat" *ngIf="popupFlag">
+        <div class="del-img" (click)="closeModel()">
+            <img alt="delete" src="../../assets/images/close.png">
+        </div>
+        <div class="newchat-sec">
+            <h2>Add New Boutique User</h2>
+            <form>
+                <div class="form-group custom-select">
+                    <select class="form-control" (change)="categorySelect($event)">
+                        <option>Select Boutique</option>
+                        <option *ngFor="let data of companiesList; let i = index;" value="{{data.id}}">{{data.company_name}}</option>
+                        <!-- <option>Frauchen Boutique</option> -->
+                        <!-- <option>Unger</option> -->
+                    </select>
+                </div>
+                <div class="form-group custom-select">
+                    <select class="form-control" (change)="userIdSelect($event)">
+                        <option></option>
+                        <option *ngFor="let data of allUserData" value="{{data.id}}">{{data.name}}</option>
+                        <!-- <option>Ben Smith</option>
+	                    <option>Lucy Brand</option>
+	                    <option>Ben Smith</option> -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-submit" title="Add" (click)="addChat()">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

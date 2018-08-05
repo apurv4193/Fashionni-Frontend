@@ -1,0 +1,111 @@
+<div class="wrapper">
+
+    <div class="form-group search_outer">
+        <input type="text" class="form-control search-feild" #searchData>
+        <a class="search-btn" title="search" (click)="searchValue(searchData)"></a>
+    </div>
+    <ul class="add-company-list">
+        <li>
+            <div class="company-block">
+                <a href="javascript:void(0)" routerLink="/admin/add-boutique/MA==" title="Add company">
+                    <figure>
+                        <div class="company-img">
+                            <span>
+                                <img src="../../assets/images/plus-default.png">
+                            </span>
+                        </div>
+                        <figcaption></figcaption>
+                    </figure>
+                </a>
+            </div>
+        </li>
+        <li *ngFor="let company of companiesList; let ind = index; ">
+            <div class="company-block">
+                <!--<span class="new-notification"></span>-->
+                <a href="javascript:void(0)" (click)="switchToBoutique(company)" title="{{company.company_name}}">
+                    <figure>
+                        <div class="company-img">
+                            <span *ngIf="company.company_image">
+                                <img [src]="company.company_image">
+                            </span>
+                            <span *ngIf="company.company_image == ''">
+                                <img src="../../assets/images/plus-default.png">
+                            </span>
+                        </div>
+                        <figcaption>{{company.company_name}}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                <span class="visibility">
+                    <img src="../../assets/images/un-visible.png" alt="">
+                </span>
+            </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper" *ngIf="!isAuthorized">
+    <div class="unauthorized-sec">
+        <div class="unauthorized-msg">
+            <div class="unauthorized-img">
+                <span>
+                    <img src="../../../assets/images/app-icon.png" alt="app icon">
+                </span>
+            </div>
+            <div class="unauthorized-content">
+                <h2>You are unauthorized user to perform this activity</h2>
+            </div>
+        </div>
+    </div>
+</div>

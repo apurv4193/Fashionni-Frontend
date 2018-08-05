@@ -1,0 +1,138 @@
+<div class="wrapper" *ngIf="isAuthorized">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon" *ngIf="rights?.edit=='1'"><img src="../../assets/images/print-icon.png" alt="print icon"></span>
+
+        <h2>{{userDetail?.user_unique_id}} <span *ngIf="userDetail?.user_unique_id">-</span> {{utilService.getCompanyParam('name')}}</h2>
+        <span class="lock-icon" *ngIf="rights?.edit=='1'" [ngClass]="{'submit-text' : isFormOpen == false}" (click)="toggleClass()" title="save"><span class="unlock"><i class="fa fa-unlock"></i></span><span class="lock"><i class="fa fa-lock"></i></span></span>
+
+        <span class="print-icon" *ngIf="rights?.edit=='1'" (click)="printToCart('printSectionId')"><img src="../../assets/images/print-icon.png" alt="print icon"></span>
+        <!-- <h2>{{userDetail?.user_unique_id}} <span *ngIf="userDetail?.user_unique_id">-</span> {{utilService.getCompanyParam('name')}}</h2>
+        <span class="lock-icon" (click)="toggleClass()" title="save"><span class="unlock"><i class="fa fa-unlock"></i></span><span class="lock"><i class="fa fa-lock"></i></span></span> -->
+    </div>
+    <div class="add-boutique-form clearfix">
+        <form [formGroup]="userForm" novalidate id="printSectionId">
+            <div class="form-block">
+                <div class="width-20">
+                    <div class="company-block">
+                        <div title="{{'Avatar' | translate}}">
+                            <figure>
+                                <div class="company-img upload-img">
+                                    <span><img [src]="user_image" alt="document img"></span>
+                                    <input type="file" name="pic" (change)="storeImageSet($event)" [hidden]="!isFormOpen">
+                                </div>
+                                <figcaption> {{'Avatar' | translate}} </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="width-80">
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label>{{'Use ID' | translate}}</label>
+                                <input type="text" class="form-control" tabindex="1" [ngClass]="{'error': userForm.controls['user_unique_id'].touched == true && userForm.controls['user_unique_id'].hasError('required')}" formControlName="user_unique_id">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label>{{'Name' | translate}}</label>
+                                <input type="text" class="form-control" tabindex="2" [ngClass]="{'error': userForm.controls['name'].touched == true && userForm.controls['name'].hasError('required') }" formControlName="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label class="user-label">{{'Role' | translate}}</label>
+                                <div class="form-control custom-select">
+                                    <select tabindex="3" (change)="onChange($event)" formControlName="user_role">
+                                        <option value="admin">{{'Admin' | translate}}</option>
+                                        <option value="manager">{{'Manager' | translate}}</option>
+                                        <option value="sales">{{'Sales' | translate}}</option>
+                                        <option value="custom">{{'Other' | translate}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" *ngIf="isCustom">
+                            <div class="form-group user-field">
+                                <label>{{'Customise' | translate}}</label>
+                                <input type="text" class="form-control" tabindex="4" formControlName="custom_user_role" [disabled]="isCustom">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label>{{'Position' | translate}}</label>
+                                <input type="text" class="form-control" tabindex="5" [ngClass]="{'error': userForm.controls['position'].touched == true && userForm.controls['position'].hasError('required') }" formControlName="position">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label>{{'Login Name' | translate}}</label>
+                                <input type="text" class="form-control" tabindex="6" [ngClass]="{'error': userForm.controls['user_name'].touched == true && userForm.controls['user_name'].hasError('required')}" formControlName="user_name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label>{{'EmailId' | translate}}</label>
+                                <input type="email" class="form-control" tabindex="7" [ngClass]="{'error': userForm.controls['email'].touched == true && (userForm.controls['email'].hasError('required') || userForm.controls['email'].hasError('email')) }" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group user-field">
+                                <label>{{'Login Password' | translate}}</label>
+                                <input type="password" class="form-control" tabindex="8" [ngClass]="{'error': userForm.controls['password'].touched == true && (userForm.controls['password'].hasError('required') || userForm.controls['password'].hasError('minLength') ) }" formControlName="password">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive access-table">
+       <div class="width-20"><div class="heading-text">{{'Access' | translate}}</div></div>
+       <div class="width-80"><div class="heading-text">{{'Others' | translate}}</div></div>
+        <table class="table table-hover">
+            <tbody>
+                <tr *ngFor="let role of companyRolePermission; let index = index; ">
+                    <td>{{role.labelName}}</td>
+                    <td>
+                        <span class="checkbox">
+                            <label >
+                                <input type="checkbox" [disabled]="permission" [(ngModel)]="role.edit"><span  class="checker"></span>
+                            </label>
+                        </span>
+                        {{'Edit' | translate}}
+                    </td>
+                    <td>
+                        <span class="checkbox">
+                            <label >
+                                <input type="checkbox" [disabled]="permission" [(ngModel)]="role.view"><span  class="checker"></span>
+                            </label>
+                        </span>
+                        {{'View' | translate}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="wrapper" *ngIf="!isAuthorized">
+    <div class="unauthorized-sec">
+        <div class="unauthorized-msg">
+            <div class="unauthorized-img">
+                <span>
+                    <img src="../../../assets/images/app-icon.png" alt="app icon">
+                </span>
+            </div>
+            <div class="unauthorized-content">
+                <h2>{{'You are unauthorized user to perform this activity' | translate}}</h2>
+            </div>
+        </div>
+    </div>
+</div>

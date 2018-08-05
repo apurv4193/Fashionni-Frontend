@@ -1,0 +1,23 @@
+<aside class="no-gutters">
+    <div class="sidebar">
+        <div class="aside-heading">
+            <h2 (click)="openCompanyDetail()">{{'Boutique' | translate}}</h2>
+            <!-- <h2>Boutique</h2> -->
+        </div>
+        <perfect-scrollbar style="height: 100vh;">
+            <ul class="boutique-list">
+                <li *ngIf="showMenuWithPermission('boutique-reg')"  routerLinkActive="active"><a routerLink="store/boutique-registration" title="{{'Registration' | translate}}">{{'Registration' | translate}}</a></li>
+                <li *ngIf="showMenuWithPermission('boutique-bank')" routerLinkActive="active"><a routerLink="store/bank-detail" title="{{'Bank' | translate}}">{{'Bank' | translate}}</a></li>
+                <li *ngIf="showMenuWithPermission('boutique-tax')" routerLinkActive="active"><a routerLink="store/tax-detail" title="{{'Tax' | translate}}">{{'Tax' | translate}}</a></li>
+                <li *ngIf="showMenuWithPermission('boutique-customs')" routerLinkActive="active"><a routerLink="store/customs" title="{{'Customs' | translate}}">{{'Customs' | translate}}</a></li>
+                <li *ngIf="showMenuWithPermission('boutique-user')" routerLinkActive="active"><a routerLink="store/user" title="{{'User' | translate}}">{{'User' | translate}}</a></li>
+                <li *ngIf="showMenuWithPermission('boutique-company')" routerLinkActive="active"><a routerLink="store/company" title="{{'Company' | translate}}">{{'Company' | translate}}</a></li>
+                <span *ngFor="let store of companyStoreList">
+                    <li *ngIf="showMenuWithPermission(store.store_slug)" routerLinkActive="active">
+                        <a routerLink="store/storedetail/{{store.id}}" title="Store - Mittelweg">Store - {{store.short_name}}</a>
+                    </li>
+                </span>
+            </ul>
+          </perfect-scrollbar>
+    </div>
+</aside>

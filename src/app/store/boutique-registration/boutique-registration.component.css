@@ -1,0 +1,67 @@
+.col-sm-6{padding: 0 8px;}
+.row{margin: 0 -8px;}
+.width-20{padding: 0 15px 0 0;}
+.width-80{padding: 0 0 0 5px;}
+.col-sm-12{padding: 0;}
+/*---form css---*/
+
+.form-group {margin-bottom: 24px;}
+.form-control {display: inline-block;width: 84.2%;margin-left: -4px;height: 48px;}
+.form-group label{display: inline-block;width: 210px;vertical-align: top;height:48px;border: 1px solid #dcdee0;background: #eee;font-size: 14px;padding:12px 12px 6px;line-height: 1.9;}
+.col-sm-6 .form-control{width: 67.8%;}
+.company-img{height: 216px;cursor: auto;background: #eee;border-color: #dcdee0;}
+.company-block > div{border-color: #dcdee0;}
+.date_picker_outer .ngx-datepicker-container .ngx-datepicker-input{padding: 0 !important;font-size: inherit !important;width: 100% !important;border: none !important;}
+@media (max-width:1900px){
+    .form-group label{width: 180px;height:40px;}
+    .form-control{width: 81.8%;height:40px;}
+    .col-sm-6 .form-control{width: 62.8%;}
+    .company-img{height: 171px;}
+    .form-group{margin-bottom: 18px;}
+}
+
+@media (max-width:1500px){
+    /*.form-group label{width: 150px;}*/
+    /*.form-control{width: 76.8%;}
+    .col-sm-6 .form-control{width: 52.5%;}*/
+    
+    .form-group label{height:37px;padding: 9px 12px 6px;}
+    .col-sm-6 .form-control{width: 60.5%;}
+    .form-control{width: 80.5%;height: 37px;}
+    .company-img{height: 147px;}
+    .form-group{margin-bottom: 13px;}
+}
+
+@media (max-width:1364px){
+    .col-sm-6 .form-control{width:51%;}
+    .form-control{width: 76%;height: 40px;}
+    .company-img{height: 170px;}
+    .form-group{margin-bottom: 17px;}
+    .form-group label{height:40px;}
+}
+
+@media (max-width:1200px){
+    .form-group label{width: 140px;font-size: 12px;height:34px;padding: 9px 5px 6px;}
+    .form-control{font-size: 12px;height:34px;width: 75.8%;}
+    .col-sm-6 .form-control{width:50%;}
+    .company-img{height: 133px;}
+    .form-group{margin-bottom: 11px;}
+    .company-block figcaption{font-size: 14px;}
+    .form-block{margin-bottom: 10px;}
+    .company-block figcaption{padding: 11px 12px 4px;}
+    
+}
+
+@media (max-width:991px){
+    
+    .form-group label{width: 112px;height:30px;padding: 9px 3px 4px;font-size:10px;}
+    .form-control{height:30px;width: 75%;padding: 9px 6px 4px;font-size:10px;}
+    .width-20{padding-right: 10px;}
+    .col-sm-6 .form-control{width: 48.5%;}
+    .company-block figcaption{font-size: 11px;padding: 12px 10px 6px;}
+    .company-block figcaption.clone-icon{padding: 11px 45px 6px 10px;}
+    .company-img{height: 99px;}
+    .company-block figcaption span{height: 22px;width: 22px;top: 3px;right: 5px;line-height: 27px;}
+    .form-group{margin-bottom: 4px;}
+    
+}

@@ -1,0 +1,58 @@
+.form-group label{width: 45%;}
+.form-control{width: 55%;}
+.custom-select{display: inline-block;}
+.access-table{width: 100%;background: #eee;font-size: 14px;border: 2px solid #dcdee0;margin-bottom: 20px;}
+.access-table .table{width: 100%;}
+.table td{padding: 13px 15px;}
+.company-block figcaption{padding: 14px 15px 7px;font-size: 17px;}
+.company-img{height: 216.94px;}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {padding:16px 15px 8px;line-height: 1.42857143;vertical-align: top;border-top: 2px solid #dcdee0;border-right: 2px solid #dcdee0;}
+table {border-spacing: 0;border-collapse: collapse;}
+.table thead tr td{border-top: none;}
+.table tr td:first-child{width: 20% !important;border-right: 2px solid #dcdee0;}
+.table tr td:last-child{border-right:none !important;}
+.access-table [class*=width-]{padding: 0;}
+.access-table .width-80{width: 79.5%;}
+.heading-text{padding:16px 15px 8px;font-size: 14px;line-height: 1.42857143;border-right: 2px solid #dcdee0;text-transform: capitalize;}
+.width-80 .heading-text{border-right: none;text-align: center;}
+select{width: 110.5%;margin: -12px -23px -6px -12px;padding:12px 23px 5px 12px;cursor: pointer;color: rgba(0,0,0,0.8);}
+.custom-select{position: relative;padding: 12px 23px 6px 12px !important;cursor: pointer;}
+.custom-select:before {display: inline-block;content: "";position: absolute;right: 6px;top: 15px;background-image: url(../../../assets/images/dropdown.png);background-position: center;background-size: contain;width: 14px;height: 14px;background-repeat: no-repeat;}
+
+@media (max-width:1900px){
+    .company-img{height: 171.5px;}
+    .company-block figcaption {padding: 11px 15px 5px;font-size: 15px;}
+    select{padding: 0 0px 0 10px;width: 100%;}
+}
+@media (max-width:1500px){
+    .access-table .width-80{width: 74%;}
+    .table tr td:first-child{width: 25% !important;}
+    select{width: 115%;padding: 7px 23px 2px 12px;margin: -10px -23px -5px -12px;}
+    .company-img{height: 147.64px;}
+}
+@media(max-width:1364px){
+    .company-img{height: 170.19px;}
+    .company-block figcaption {padding: 14px 10px 5px;}
+}
+@media (max-width:1200px){
+    .heading-text{font-size: 12px;padding: 12px 15px 6px;}
+    .access-table{font-size: 12px;}
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{padding: 12px 15px 6px;}
+    .company-img{height:133.8px;}
+    .company-block figcaption{padding: 11px 12px 4px;font-size: 14px;}
+    .custom-select{padding: 9px 23px 6px 4px !important;}
+    select{width: 104.5%;margin: -8px -23px -4px -4px;padding:6px 23px 3px 4px;}
+    .custom-select:before{top: 9px;}
+}
+
+@media (max-width: 991px){
+    .company-img{height: 99.59px;}
+    .heading-text,.access-table{font-size: 11px;}
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{padding: 12px 8px 6px;}
+    .checkbox{margin-right: 7px;}
+    .custom-select:before{width: 11px;height: 11px;top: 12px;}
+    .form-group label{width: 47%;}
+    .form-control{width: 53%;}
+    .company-block figcaption {padding: 8px 12px 4px;font-size: 13px;}
+    select{padding: 6px 23px 3px 4px;width: 102.5%}
+}

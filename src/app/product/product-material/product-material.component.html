@@ -1,0 +1,233 @@
+<div class="wrapper">
+	<div class="company-heading bg-offwhite">
+		<span class="print-icon">
+			<img src="../../../assets/images/material.png" alt="colour icon">
+		</span>
+		<h2>{{'Material' | translate}}</h2>
+		<span class="lock-icon" title="save" (click)="formOpen()" [ngClass]="{'submit-text' : isFormOpen == false}" class="lock-icon">
+			<span class="unlock">
+				<i class="fa fa-unlock"></i>
+			</span>
+			<span class="lock">
+				<i class="fa fa-lock"></i>
+			</span>
+		</span>
+	</div>
+	<div class="color-content">
+		<div class="add-color">
+			<div class="company-block">
+				<div>
+					<figure>
+						<div class="company-img upload-img">
+							<span>
+								<img [src]="colorImage" alt="plus icon">
+							</span>
+							<input type="file" name="pic" (change)="fileChange($event)" [hidden]="!isFormOpen">
+						</div>
+					</figure>
+				</div>
+			</div>
+			<form [formGroup]="materialForm" novalidate>
+				<div class="brand-name-list">
+					<div class="form-group">
+						<label>
+							<app-flag-aus></app-flag-aus>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_en" [ngClass]="{'errorBottom':  materialForm.controls.material_name_en.touched == true && materialForm.controls.material_name_en.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-china></app-flag-china>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_ch" [ngClass]="{'errorBottom':  materialForm.controls.material_name_ch.touched == true && materialForm.controls.material_name_ch.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-germany></app-flag-germany>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_ge" [ngClass]="{'errorBottom':  materialForm.controls.material_name_ge.touched == true && materialForm.controls.material_name_ge.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-france></app-flag-france>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_fr" [ngClass]="{'errorBottom':  materialForm.controls.material_name_fr.touched == true && materialForm.controls.material_name_fr.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-italy></app-flag-italy>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_it" [ngClass]="{'errorBottom':  materialForm.controls.material_name_it.touched == true && materialForm.controls.material_name_it.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-spain></app-flag-spain>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_sp" [ngClass]="{'errorBottom':  materialForm.controls.material_name_sp.touched == true && materialForm.controls.material_name_sp.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-russia></app-flag-russia>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_ru" [ngClass]="{'errorBottom':  materialForm.controls.material_name_ru.touched == true && materialForm.controls.material_name_ru.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-japan></app-flag-japan>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_jp" [ngClass]="{'errorBottom':  materialForm.controls.material_name_jp.touched == true && materialForm.controls.material_name_jp.hasError('required')}">
+					</div>
+				</div>
+				<button type="submit" class="btn-default" [disabled]="!isFormOpen" (click)="materialSave()">
+					{{'AddNewMaterial' | translate}}
+				</button>
+			</form>
+		</div>
+		<div class="color-sec">
+			<div class="color-list" (scroll)="onWindowScroll($event)" #matList>
+				<div class="color-block" *ngFor="let material of allMaterial; let ind = index" (click)="chooseForEdit(material,ind)" [ngClass]="{'active':material.isSelected}">
+					<figure>
+						<span>
+							<img [src]="material.material_image" alt="color img">
+						</span>
+						<figcaption>{{material.material_name_en}}</figcaption>
+					</figure>
+				</div>
+
+				<div *ngIf="allMaterial.length==0">
+					No record found.!
+				</div>
+			</div>
+		</div>
+		<div class="edit-color add-color">
+			<span class="cancel-popup" (click)="deleteImage()">
+				<img *ngIf="materialImageEdit!=''" src="../../../assets/images/cancel-button-light.png" alt="cancel">
+			</span>
+			<div class="company-block">
+				<div>
+					<figure>
+						<div class="company-img upload-img">
+							<span>
+								<img *ngIf="materialImageEdit!=''" [src]="materialImageEdit" alt="plus icon">
+							</span>
+							<input *ngIf="deleteFlag" type="file" name="pic" (change)="fileChangeEdit($event)" [hidden]="!editFormFlag">
+						</div>
+					</figure>
+				</div>
+			</div>
+			<form [formGroup]="materialFormEdit" novalidate>
+				<div class="brand-name-list">
+					<div class="form-group">
+						<label>
+							<app-flag-aus></app-flag-aus>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_en" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_en.touched == true && materialFormEdit.controls.material_name_en.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-china></app-flag-china>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_ch" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_ch.touched == true && materialFormEdit.controls.material_name_ch.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-germany></app-flag-germany>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_ge" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_ge.touched == true && materialFormEdit.controls.material_name_ge.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-france></app-flag-france>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_fr" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_fr.touched == true && materialFormEdit.controls.material_name_fr.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-italy></app-flag-italy>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_it" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_it.touched == true && materialFormEdit.controls.material_name_it.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-spain></app-flag-spain>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_sp" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_sp.touched == true && materialFormEdit.controls.material_name_sp.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-russia></app-flag-russia>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_ru" [ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_ru.touched == true && materialFormEdit.controls.material_name_ru.hasError('required')}">
+					</div>
+					<div class="form-group">
+						<label>
+							<app-flag-japan></app-flag-japan>
+						</label>
+						<input type="text" class="form-control" formControlName="material_name_jp"[ngClass]="{'errorBottom':  materialFormEdit.controls.material_name_jp.touched == true && materialFormEdit.controls.material_name_jp.hasError('required')}">
+					</div>
+				</div>
+			</form>
+			<button type="submit" class="btn-default" [disabled]="!editFormFlag" (click)="updateMaterial()" title="Save Changes">
+				{{'SaveChanges' | translate}}
+			</button>
+			<button type="button" class="btn-default delete-btn" [disabled]="!editFormFlag" (click)="deleteMaterial()" title="Delete">
+				{{'Delete' | translate}}
+			</button>
+		</div>
+	</div>
+	<div class="notification-sec">
+		<h2 *ngIf="unReadNotificationList?.length > 0">
+			<img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+		</h2>
+		<div class="notification-list">
+			<div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+				<div class="date-block">
+					<span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+					<span class="day">{{notification.date_1 | date : 'E'}}.</span>
+				</div>
+				<div class="content-block">{{notification.notification_text}}
+					<span class="checkbox">
+						<label>
+							<input type="checkbox" (change)="readNotification(notification, index)">
+							<span class="checker"></span>
+						</label>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<h2 class="confirm-notification">
+			<img src="../../assets/images/tick-icon.png" alt="pencil icon">
+			<span class="visibility" (click)="hideNotification()">
+				<img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+			</span>
+			<span class="visibility" (click)="hideNotification()">
+				<img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+			</span>
+		</h2>
+		<div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+			<!-- <h2>
+				<img src="../../assets/images/tick-icon.png" alt="pencil icon">
+				<span class="visibility">
+					<img src="../../assets/images/un-visible.png" alt="">
+				</span>
+			</h2> -->
+			<div *ngIf="hideNotificationFlag">
+				<div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+					<div class="date-block">
+						<span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+						<span class="day">{{notification.date_1 | date : 'E'}}.</span>
+					</div>
+					<div class="content-block">{{notification.notification_text}}
+						<span class="checkbox">
+							<label>
+								<input type="checkbox" checked>
+								<span class="checker"></span>
+							</label>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

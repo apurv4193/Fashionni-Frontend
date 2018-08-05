@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Bangla mn;
+    src: url(/assets/fonts/bangla-mn.ttf') format('truetype'),
+        url('/assets/fonts/bangla-mn.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family:'Bangla MN';
+    src: url('/assets/fonts/Bangla MN.eot');
+	src: url('/assets/fonts/Bangla MN.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Bangla MN.woff2') format('woff2'),
+		url('/assets/fonts/Bangla MN.woff') format('woff'),
+		url('/assets/fonts/Bangla MN.svg#Bangla MN') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-00BE;
+}
+@font-face {
+    font-family: 'Kenney Future Square';
+    src: url('/assets/fonts/Kenney-Future-Square.eot');
+    src: url('/assets/fonts/Kenney-Future-Square.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/Kenney-Future-Square.woff2') format('woff2'),
+        url('/assets/fonts/Kenney-Future-Square.woff') format('woff'),
+        url('/assets/fonts/Kenney-Future-Square.ttf') format('truetype'),
+        url('/assets/fonts/Kenney-Future-Square.svg#Kenney-Future-Square') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

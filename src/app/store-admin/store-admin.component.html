@@ -1,0 +1,36 @@
+<div class="wrapper-login" [hidden]="loginSuccess">
+    <div class="flex-container">
+        <div class="width-50">
+            <div class="store-login">
+                <div class="sec-login">
+                    <div class="login-icon">
+                        <span><img src="../../assets/images/store-login-icon.png" alt="store icon"></span>
+                    </div>
+                    <form name="form" (ngSubmit)="loginForm.valid && loginSubmit()" [formGroup]="loginForm" novalidate>
+                        <div class="login-sec">
+                            <div class="form-group username">
+                                <input type="text" class="form-control" placeholder="{{'User name' | translate}}" formControlName="email" tabindex="1">
+                            </div>
+                            <div class="form-group pwd">
+                                <input type="password" class="form-control" placeholder="{{'Password' | translate}}" formControlName="password" tabindex="2">
+                            </div>
+                            <div class="forgot clearfix">
+                                <span class="forgot-username"><a href="#">{{'Forgot Username?' | translate}}</a></span>
+                                <span class="forgot-password"><a href="#">{{'Forgot password?' | translate}}</a></span>
+                            </div>
+                            <button class="btn btn-store" [disabled]="!loginForm.valid || isLoadStart" type="submit" tabindex="3" title="{{'Login' | translate}}" (click)="loginSubmit()">{{'Login' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="width-50">
+            <div class="banner">
+                <div class="banner-content">
+                    <h1>{{'Suite' | translate}}</h1>
+                    <button class="btn btn-admin" routerLink="/login" type="button" tabindex="4" title="{{'Switch to Admin' | translate}}">{{'Switch to Admin' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

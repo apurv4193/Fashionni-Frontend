@@ -1,0 +1,53 @@
+.wrapper-login{padding: 68px 0 72px;}
+.flex-container{display: flex;flex-wrap: wrap;}
+.width-50{display: inline-flex;flex-basis: 50%;height:calc(100vh - 68px - 70px);}
+.store-login{width: 100%;height: 100%;background: #BDA97F;text-align: center;position: relative;}
+.sec-login{position: absolute;top: 50%;transform: translateY(-50%);width: 100%;}
+.login-icon{display: inline-block;margin: 0 auto 60px;}
+.login-icon span{width: 118px;height: 118px;margin: 0 auto;border-radius: 50%;background: #ECE7D0;border: 10px solid #d7c8a3;display: block;line-height: 140px;} 
+.login-sec{max-width: 500px;margin: 0 auto;}
+::-webkit-input-placeholder {color: #000;opacity:1;}      /* WebKit browsers */
+:-moz-placeholder {color: #000;opacity:1;}                /* Mozilla Firefox 4 to 18 */
+::-moz-placeholder {color: #000;opacity:1;}               /* Mozilla Firefox 19+ */
+:-ms-input-placeholder {color: #000;opacity:1;}
+.form-control{height: 54px;background: #ede7cd;border-color: #ede7cd;border-radius: 6px;box-shadow: none;position: relative;width: 100%;margin-left: 0;font-size: 15px;padding: 18px 15px 12px 45px;}
+.form-group{position: relative;}
+.username:before, .pwd:before{position: absolute;content: '';width: 22px;height: 22px;background-image: url(../../assets/images/user-icon.png);background-size: contain;background-repeat: no-repeat;background-position: center;top: 15px;left: 12px;display: block;z-index: 9;}
+.pwd:before{background-image: url(../../assets/images/password-icon.png);}
+.forgot{font-size: 14px;}
+.forgot a{color: #000;}
+.forgot-username{float: left;}
+.forgot-password{float: right;}
+.btn{background: #ede7cd;border: none;padding: 18px 48px 12px;border-radius: 6px;box-shadow: none;outline: none;text-transform: capitalize;font-size: 16px;display: inline-block;margin-top: 60px;cursor: pointer;transition:0.5s all ease-out;-webkit-transition:0.5s all ease-out;-moz-transition:0.5s all ease-out;-ms-transition:0.5s all ease-out;-o-transition:0.5s all ease-out;}
+.btn:hover{background: #d2ccb5;}
+.banner{width: 100%;height: 100%;background: #eee;text-align: center;position: relative;color: #000}
+.banner-content{position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);}
+h1{font-family: 'Kenney Future Square',sans-serif;text-transform: uppercase;font-size: 160px;}
+.btn-admin{background:#BDA97F;margin-top: 20px;}
+
+@media (max-width:1500px){
+    .width-50{height:calc(100vh - 63px - 67px);}
+    h1{font-size: 120px;}
+    .wrapper-login{padding: 63px 0 67px;}
+}
+@media (max-width:1200px){
+    .login-icon span{width: 108px;height: 108px;line-height: 135px;}
+    .width-50{height: calc(100vh - 75px - 58px);}
+    .wrapper-login{padding-bottom: 58px;} .login-icon span{width: 108px;height: 108px;line-height: 135px;}
+    .width-50{height: calc(100vh - 75px - 58px);}
+    .wrapper-login{padding:54px 0 58px;}
+    .login-sec{max-width: 80%;}
+    h1{font-size: 100px;}
+    .form-control{height: 47px;font-size: 13px;padding:  17px 15px 8px 45px}
+    .username:before, .pwd:before{top: 9px;}
+    .form-group{margin-bottom: 12px;}
+}
+
+@media (max-width:991px){
+    .width-50{height: calc(100vh - 49px - 46px);}
+    .wrapper-login{padding:49px 0 44px;}
+    .btn{margin-top: 40px;padding: 13px 38px 7px;}
+}
+@media (max-height:600px){
+    .width-50{height: 100vh;}
+}

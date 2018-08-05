@@ -1,0 +1,305 @@
+<div class="wrapper" *ngIf="isAuthorized">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon" (click)="printToCart('printSectionId')" *ngIf="rights?.edit=='1'">
+            <img src="../../assets/images/print-icon.png" alt="print icon">
+        </span>
+        <h2>{{utilService.getCompanyHeaderForStore()}}</h2>
+        <span *ngIf="rights?.edit=='1'" [ngClass]="{'submit-text' : isFormOpen == false}" class="lock-icon" (click)="toggleClass()"
+            title="save">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <form [formGroup]="companyForm" novalidate id='printSectionId'>
+        <!-- <div class="margin-20">
+                    <button type="submit" class="btn btn-primary pull-right" [disabled]="!companyForm.valid">Submit</button>
+                </div> -->
+        <div class="add-boutique-form clearfix">
+            <div class="form-block">
+                <div class="width-20">
+                    <div class="company-block">
+                        <div title="{{'Logo' | translate}}">
+                            <figure>
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="comapny_image" alt="plus image">
+                                        <input type="file" name="pic" (change)="imageSet($event,i)" [hidden]="!isFormOpen">
+                                    </span>
+                                </div>
+                                <figcaption> {{'Logo' | translate}} </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="width-80">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>{{'Company Name *' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="company_name" [ngClass]="{'error': companyForm.controls['company_name'].touched && companyForm.controls['company_name'].hasError('required')}">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>{{'Address *' | translate}}</label>
+                            <input type="text" class="form-control" places-auto-complete (place_changed)="companyAddressCallbackClone($event)" formControlName="address"
+                                [ngClass]="{'error': companyForm.controls['address'].touched && companyForm.controls['address'].hasError('required')}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Postal Code *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="postal_code" [ngClass]="{'error': companyForm.controls['postal_code'].touched && companyForm.controls['postal_code'].hasError('required')}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'City *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="city" [ngClass]="{'error': companyForm.controls['city'].touched && companyForm.controls['city'].hasError('required')}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Province/State *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="state" [ngClass]="{'error': companyForm.controls['state'].touched && companyForm.controls['state'].hasError('required')}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Country *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="country" [ngClass]="{'error': companyForm.controls['country'].touched && companyForm.controls['country'].hasError('required')}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--form-block end-->
+            <div class="form-block">
+                <div class="width-20">
+                    <div class="company-block">
+                        <div title="{{'Social' | translate}}">
+                            <figure>
+                                <div class="company-img bg-offwhite">
+                                    <span>
+                                        <img src="../../assets/images/social.png" alt="plus image">
+                                    </span>
+                                </div>
+                                <figcaption>{{'Social' | translate}}</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="width-80">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Website' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="website">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Facebook' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="facebook">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'EmailId *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="company_email" [ngClass]="{'error': companyForm.controls['company_email'].touched && companyForm.controls['company_email'].hasError('required')}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Twitter' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="twitter">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Whatsapp' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="whatsapp">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Instagram' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="instagram">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'WeChat' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="wechat">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Pinterest' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="pinterest">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-block">
+                <div class="width-20">
+                    <div class="company-block">
+                        <div title="{{'Contact' | translate}}">
+                            <figure>
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="contact_person_image" alt="plus image">
+                                        <input type="file" name="pic" (change)="contactImageSet($event)" [hidden]="!isFormOpen">
+                                    </span>
+                                </div>
+                                <figcaption> {{'Contact' | translate}} </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="width-80">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Position' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_position">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Gender' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_gender">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'First Name' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_first_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Surname' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_last_name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Telefon' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_telefon">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Fax' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_fax">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Mobile' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_mo_no">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'EmailId' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="contact_person_email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--add-boutique-form end-->
+    </form>
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" [disabled]="!permission" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                <span class="visibility">
+                    <img src="../../assets/images/un-visible.png" alt="">
+                </span>
+            </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--wrapper end-->
+
+<div class="wrapper" *ngIf="!isAuthorized">
+    <div class="unauthorized-sec">
+        <div class="unauthorized-msg">
+            <div class="unauthorized-img">
+                <span>
+                    <img src="../../../assets/images/app-icon.png" alt="app icon">
+                </span>
+            </div>
+            <div class="unauthorized-content">
+                <h2>{{'You are unauthorized user to perform this activity' | translate}}</h2>
+            </div>
+        </div>
+    </div>
+</div>

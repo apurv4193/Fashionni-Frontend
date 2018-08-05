@@ -1,0 +1,210 @@
+<div class="wrapper">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon">
+            <img src="../../../assets/images/list.png" alt="List icon">
+        </span>
+        <h2>{{'Category' | translate}}</h2>
+        <span class="lock-icon" title="save" class="lock-icon" (click)='lockFun()' [ngClass]="{'submit-text' : isFormOpen == false}"
+            class="lock-icon">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <div class="add-color add-category">
+        <div class="company-block category-img">
+            <div>
+                <figure>
+                    <div class="company-img upload-img">
+                        <span>
+                            <img src="{{brandImage}}" alt="plus icon">
+                        </span>
+                        <input type="file" name="pic" *ngIf="editFlag && categoryLevel != 1 && categoryLevel != 2" [hidden]="!isFormOpen" (change)="fileChange($event)" multiple>
+                    </div>
+                    <figcaption>{{'Add/Edit Category' | translate}}</figcaption>
+                </figure>
+            </div>
+        </div>
+        <form [formGroup]='saveCategoryForm'>
+            <div class="brand-name-list">
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/aus-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_en" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_en.touched == true && saveCategoryForm.controls.category_name_en.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/china-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_ch" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_ch.touched == true && saveCategoryForm.controls.category_name_ch.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/germany-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_ge" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_ge.touched == true && saveCategoryForm.controls.category_name_ge.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/france-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_fr" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_fr.touched == true && saveCategoryForm.controls.category_name_fr.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/italy-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_it" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_it.touched == true && saveCategoryForm.controls.category_name_it.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/spain-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_sp" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_sp.touched == true && saveCategoryForm.controls.category_name_sp.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/russia-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_ru" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_ru.touched == true && saveCategoryForm.controls.category_name_ru.hasError('required')}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <img src="../../../assets/images/japan-flag.png" alt="flag">
+                    </label>
+                    <input type="text" class="form-control" formControlName="category_name_jp" [ngClass]="{'errorBottom':  saveCategoryForm.controls.category_name_jp.touched == true && saveCategoryForm.controls.category_name_jp.hasError('required')}">
+                </div>
+            </div>
+            <button type="submit" class="btn-default" title="Save Change" (click)="saveFormData(saveCategoryForm)">{{'Save Change' | translate}}</button>
+            <button type="button" class="btn-default delete-btn" title="Delete" (click)="deleteCategory(editId)">{{'Delete' | translate}}</button>
+        </form>
+    </div>
+    <div class="category-sec">
+        <div class="category-img-list">
+            <div class="category-block" *ngFor="let data of imageArray; let i = index">
+                <figure>
+                    <div class="upload-img">
+                        <span>
+                            <!-- <img src="../../../assets/images/star.png" alt="favourite icon"> -->
+                            <div *ngIf="data.img != '../../../assets/images/category-add.png'" [hidden]="!isFormOpen" Class="del-img" (click)="deleteImage(data.id, i)">
+                                <img src="../../assets/images/close.png" alt="delete">
+                            </div>
+                        </span>
+                        <img src="{{data.img}}" alt="category img">
+                        <input type="file" name="pic" *ngIf="isFormOpen && categoryLevel != 1 && categoryLevel != 2" [hidden]="!editFlag" (change)="singleFileChange($event,data.id,categoryId,i)">
+                    </div>
+                </figure>
+            </div>
+        </div>
+
+        <div class="category-content-list clearfix">
+            <div class="category-content">
+                <h2>{{'Category I' | translate}}</h2>
+                <perfect-scrollbar style="height: 350px;">
+                <ul *ngFor="let data of categories.category1; let i = last, let j = index">
+                    <!-- <li class="active">Women</li> -->
+                    <li (click)='category(data.id,2,j)' [ngClass]="{'active': data.activeFlag == true}">{{data.category_name_en}}</li>
+                </ul>
+                <ul>
+                    <li (click)="addCategory(2, currentId[1], 1)">
+                        <strong>+</strong>
+                    </li>
+                </ul>
+            </perfect-scrollbar>
+            </div>
+            <div class="category-content">
+                <h2>{{'Category II' | translate}}</h2>
+                <ul *ngFor="let data of categories.category2; let i = last, let j = index">
+                    <!-- <li class="active">Clothing</li> -->
+                    <li (click)='category(data.id,3,j)' [ngClass]="{'active': data.activeFlag == true}">{{data.category_name_en}}</li>
+                </ul>
+                <ul *ngIf="plusFlag >= 2 ">
+                    <li (click)="addCategory(3, currentId[1], 2)">
+                        <strong>+</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="category-content">
+                <h2>{{'Category III' | translate}}</h2>
+                <ul *ngFor="let data of categories.category3; let i = last, let j = index">
+                    <li (click)='category(data.id,4,j)' [ngClass]="{'active': data.activeFlag == true}">{{data.category_name_en}}</li>
+                </ul>
+                <ul *ngIf="plusFlag >= 3 ">
+                    <li (click)="addCategory(4, currentId[1], 3)">
+                        <strong>+</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="category-content">
+                <h2>{{'Category IV' | translate}}</h2>
+                <ul *ngFor="let data of categories.category4; let i = last, let j = index">
+                    <!-- <li>Waistcoat & Gilets</li> -->
+                    <li (click)='category(data.id,5,j)' [ngClass]="{'active': data.activeFlag == true}">{{data.category_name_en}}</li>
+                </ul>
+                <ul *ngIf="plusFlag >= 4 ">
+                    <li (click)="addCategory(5, currentId[1], 4)">
+                        <strong>+</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                    <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                    <span class="visibility">
+                        <img src="../../assets/images/un-visible.png" alt="">
+                    </span>
+                </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

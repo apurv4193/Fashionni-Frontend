@@ -1,0 +1,55 @@
+<!--<form name="form" (ngSubmit)="loginForm.valid && loginSubmit()" [formGroup]="loginForm" novalidate>
+<div class="wrapper">
+    <div class="login-screen">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" placeholder="Email" tabindex="1" formControlName="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Password" tabindex="2" formControlName="password" class="form-control">
+        </div>
+        <div class="text-center">
+            <button type="submit" tabindex="3" [disabled]="isLoadStart" class="btn">Login</button>
+        </div>
+    </div>
+</div>
+</form>-->
+
+<!--<a routerLink="/admin/companies">admin</a>-->
+<div class="wrapper-login" [hidden]="loginSuccess">
+    <div class="flex-container">
+        <div class="width-50">
+            <div class="banner">
+                <div class="banner-content">
+                    <h1>{{'Suite' | translate}}</h1>
+                    <button class="btn btn-admin" routerLink="/store-admin" type="button" tabindex="4" title="{{'Switch to Boutique' | translate}}">{{'Switch to Boutique' | translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="width-50">
+            <div class="store-login">
+                <div class="sec-login">
+                    <div class="login-icon">
+                        <span><img src="../../assets/images/admin-login-icon.png" alt="admin icon"></span>
+                    </div>
+                    <form name="form" (ngSubmit)="loginForm.valid && loginSubmit()" [formGroup]="loginForm" novalidate>
+                        <div class="login-sec">
+                            <div class="form-group username">
+                                <input type="text" class="form-control" formControlName="email" placeholder="{{'User name' | translate}}" tabindex="1">
+                            </div>
+                            <div class="form-group pwd">
+                                <input type="password" class="form-control" formControlName="password" placeholder="{{'Password' | translate}}" tabindex="2">
+                            </div>
+                            <div class="forgot clearfix">
+                                <span class="forgot-username"><a href="#">{{'Forgot Username?' | translate}}</a></span>
+                                <span class="forgot-password"><a href="#">{{'Forgot password?' | translate}}</a></span>
+                            </div>
+                            <button class="btn btn-store" [disabled]="isLoadStart" type="submit" tabindex="3" title="{{'Login' | translate}}">{{'Login' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

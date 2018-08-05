@@ -1,0 +1,18 @@
+<aside class="no-gutters">
+    <div class="sidebar">
+        <div class="aside-heading">
+            <h2 routerLink="/admin/companies">{{'Boutique' | translate}}</h2>
+        </div>
+        <perfect-scrollbar style="height: 100vh;">
+            <ul class="boutique-list">
+                <li *ngFor="let company of companiesList; let ind = index;" routerLinkActive="active">
+                    <a href="javascript:void(0)" routerLink="/admin/add-boutique/{{company['id']}}" title="{{company.company_unique_id}} - {{company.company_name}}">
+                        <!-- <div appShortName [id]="company.company_unique_id" [name]="company.company_name" (finalValue)="getData()">  -->
+                            {{company.company_unique_id}} - {{company.company_name}}
+                        <!-- </div> -->
+                    </a>
+                </li>
+            </ul>
+        </perfect-scrollbar>
+    </div>
+</aside>

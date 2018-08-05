@@ -1,0 +1,271 @@
+<div class="wrapper">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon" (click)="printToCart('printSectionId')">
+            <img src="../../assets/images/print-icon.png" alt="print icon">
+        </span>
+        <h2 *ngIf="updateCompanyId>0">
+            {{companiesDetail['company_unique_id']}}
+            <span *ngIf="companiesDetail['company_unique_id']!=null">-</span> {{companiesDetail['company_name']}}
+        </h2>
+        <span class="lock-icon" [ngClass]="{'submit-text' : isFormOpen == false}" (click)="save(myForm)" title="save">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <div class="add-boutique-form clearfix" id="printSectionId">
+        <form [formGroup]="myForm" novalidate>
+            <div class="form-block">
+                <div class="width-20">
+                    <div class="company-block">
+                        <div title="Add company">
+                            <figure>
+                                <div *ngIf="imagePath != '../../assets/images/plus-default.png'" Class="del-img" (click)="deleteImage(imagePath)">
+                                    <img src="../../assets/images/close.png" title="delete" alt="delete">
+                                </div>
+                                <div class="company-img upload-img">
+                                    <span>
+                                        <img [src]="imagePath">
+                                    </span>
+                                    <input type="file" name="pic" formControlName="company_image" (change)="imageSet($event)" [hidden]="!isFormOpen">
+                                </div>
+                                <figcaption>{{ 'Company' | translate}}</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="width-80">
+                    <!-- <div [innerHTML]="htmlData"> -->
+                    <!-- </div> -->
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>{{'Company Name *' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="company_name" [ngClass]="{'error': myForm.controls['company_name'].touched == true && myForm.controls['company_name'].hasError('required')}">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>{{'Address *' | translate}}</label>
+                            <!-- <ng4geo-autocomplete class="form-control custom-autocomplete" [userSettings]="userSettings" (componentCallback)="addressCallback($event)"></ng4geo-autocomplete> -->
+                            <!-- <input type="text" class="form-control" formControlName="address" id="address" name="address" placeholder="Address" -->
+                            <!-- class="input-xlarge" places-auto-complete (place_changed)="placeChanged($event)"> -->
+                            <input type="text" class="form-control" places-auto-complete (place_changed)="addressCallback($event)" formControlName="address"
+                                [ngClass]="{'error': myForm.controls['address'].touched && myForm.controls['address'].hasError('required')}">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Postal Code *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="postal_code" [ngClass]="{'error': myForm.controls['postal_code'].touched == true && myForm.controls['postal_code'].hasError('required')}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'City *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="city" [ngClass]="{'error': (myForm.controls['city'].touched == true && myForm.controls['city'].hasError('required')) || (myForm.controls['city'].hasError('nameValidation') && myForm.controls['city'].touched == true)}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Province/State *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="state" [ngClass]="{'error': (myForm.controls['state'].touched == true && myForm.controls['state'].hasError('required')) || (myForm.controls['state'].hasError('nameValidation') && myForm.controls['state'].touched == true)}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Country *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="country" [ngClass]="{'error': (myForm.controls['country'].touched == true && myForm.controls['country'].hasError('required')) || (myForm.controls['country'].hasError('nameValidation') && myForm.controls['country'].touched == true)}">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Email *' | translate}}</label>
+                                <input type="text"  class="form-control" formControlName="email" [ngClass]="{'error': (myForm.controls['email'].touched == true && myForm.controls['email'].hasError('required')) ||  (myForm.controls['email'].hasError('emailValidation') && myForm.controls['email'].touched == true)}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Password *' | translate}}</label>
+                                <input type="password"  class="form-control" formControlName="password" [ngClass]="{'error': (myForm.controls['password'].touched == true && myForm.controls['password'].hasError('required')) || (myForm.controls['password'].hasError('lengthValidation') && myForm.controls['password'].touched == true)}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{'Company Unique Id *' | translate}}</label>
+                                <input type="text" class="form-control" formControlName="company_unique_id" [ngClass]="{'error': myForm.controls['company_unique_id'].touched == true && myForm.controls['company_unique_id'].hasError('required')}">
+                            </div>
+                        </div>
+                    </div> -->
+                </div> 
+                </div>
+                <div class="form-block">
+                    <div class="width-20">
+                        <div class="company-block">
+                            <div title="Add company">
+                                <figure>
+                                    <div *ngIf="imagePath != '../../assets/images/plus-default.png'" Class="del-img">
+                                        <img src="../../assets/images/close.png" title="delete" alt="delete">
+                                    </div>
+                                    <div class="company-img upload-img">
+                                        <span>
+                                            <img src="../../assets/images/key-tooth.png">
+                                        </span>
+                                        <!-- <input type="file" name="pic" formControlName="company_image" (change)="imageSet($event)" [hidden]="!isFormOpen"> -->
+                                    </div>
+                                    <figcaption>{{'Super Admin' | translate}}</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="width-80">
+                        <div class="row clearfix">                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{'Super Admin Id' | translate}} *</label>
+                                    <input type="text" class="form-control" formControlName="company_unique_id" [ngClass]="{'error': myForm.controls['company_unique_id'].touched == true && myForm.controls['company_unique_id'].hasError('required')}">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="full_width_label">{{ 'Supper Admin ID can only created by Fashionni' | translate }}</label>
+                                </div>
+                            </div>                          
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{'Login Email' | translate}} *</label>
+                                    <input type="text" class="form-control" formControlName="email" [ngClass]="{'error': (myForm.controls['email'].touched == true && myForm.controls['email'].hasError('required')) ||  (myForm.controls['email'].hasError('emailValidation') && myForm.controls['email'].touched == true)}">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="full_width_label">{{'Login Email can be changed by Boutique' | translate}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{'Login Password' | translate}} *</label>
+                                    <input type="password" class="form-control" formControlName="password" [ngClass]="{'error': (myForm.controls['password'].touched == true && myForm.controls['password'].hasError('required')) || (myForm.controls['password'].hasError('lengthValidation') && myForm.controls['password'].touched == true)}">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="full_width_label">{{'Login Password can be changed by Boutique' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 label_padding">
+                                <div class="form-group">
+                                    <label class="tweleve_label">{{ 'Each Company will get only one Super Admin ID. For any questions, please contact Fashionni' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div formArrayName="store">
+                    <div *ngFor="let address of myForm.controls.store.controls; let i=index" class="panel panel-default">
+                        <!-- <div class="panel-heading">
+                        <span>Store {{i + 1}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)"></span>
+                    </div> -->
+                        <div class="panel-body" [formGroupName]="i">
+                            <!-- <address [group]="myForm.controls.addresses.controls[i]"></address> -->
+                            <div class="form-block form-block-copy">
+                                <div class="width-20">
+                                    <div class="company-block">
+                                        <div title="Add company">
+                                            <figure>
+                                                <div *ngIf="base64Array[i] != '../../assets/images/plus-default.png'" Class="del-img" (click)="deleteStoreImage(base64Array[i],i)">
+                                                    <img src="../../assets/images/close.png" title="delete" alt="delete">
+                                                </div>
+                                                <div class="company-img upload-img">
+                                                    <span>
+                                                        <img [src]="base64Array[i]">
+                                                    </span>
+                                                    <input type="file" name="pic" (change)="storeImageSet($event,i)" [hidden]="!isFormOpen">
+                                                </div>
+
+                                                <figcaption>
+                                                    <span class="delete-icon" title="Delete" *ngIf="myForm.controls.store.controls.length > 1 && i != 0" (click)="removeAddress(i)">
+                                                        <img alt="delete" title="delete" src="../../assets/images/close.png">
+                                                    </span>
+                                                    {{'Store' | translate}} {{i + 1}}
+                                                    <span *ngIf="isFormOpen">
+                                                        <i (click)="addAddress(i)" class="fa fa-clone"></i>
+                                                    </span>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="width-80">
+                                    <div class="row clearfix">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{'Store Name *' | translate}}</label>
+                                                <input type="text" class="form-control" formControlName="store_name" [ngClass]="{'error': myForm.controls.store.controls[i].controls.store_name.touched == true && myForm.controls.store.controls[i].controls.store_name.hasError('required')}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{'Short Name *' | translate}}</label>
+                                                <input type="text" class="form-control" formControlName="short_name" [ngClass]="{'error': myForm.controls.store.controls[i].controls.short_name.touched == true && myForm.controls.store.controls[i].controls.short_name.hasError('required')}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>{{'Address *' | translate}}</label>
+                                            <!-- <ng4geo-autocomplete class="form-control custom-autocomplete" [userSettings]="userSettings" (componentCallback)="addressCallbackClone($event,i)"
+                                            [ngClass]="{'error': addressCloneError == true}"></ng4geo-autocomplete> -->
+                                            <input type="text" class="form-control" places-auto-complete (place_changed)="addressCallbackClone($event,i)" formControlName="address"
+                                                [ngClass]="{'error': myForm.controls.store.controls[i].controls.address.touched == true && myForm.controls.store.controls[i].controls.address.hasError('required')}">
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{'Postal Code *' | translate}}</label>
+                                                <input type="text" class="form-control" formControlName="postal_code" [ngClass]="{'error': myForm.controls.store.controls[i].controls.postal_code.touched == true && myForm.controls.store.controls[i].controls.postal_code.hasError('required')}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{'City *' | translate}}</label>
+                                                <input type="text" class="form-control" formControlName="city" [ngClass]="{'error': (myForm.controls.store.controls[i].controls.city.touched == true && myForm.controls.store.controls[i].controls.city.hasError('required'))}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{'Province/State *' | translate}}</label>
+                                                <input type="text" class="form-control" formControlName="state" [ngClass]="{'error': (myForm.controls.store.controls[i].controls.state.touched == true && myForm.controls.store.controls[i].controls.state.hasError('required'))}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>{{'Country *' | translate}}</label>
+                                                <input type="text" class="form-control" formControlName="country" [ngClass]="{'error': (myForm.controls.store.controls[i].controls.country.touched == true && myForm.controls.store.controls[i].controls.country.hasError('required'))}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+        </form>
+        </div>
+    </div>

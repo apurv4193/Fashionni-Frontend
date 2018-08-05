@@ -1,0 +1,184 @@
+<div class="wrapper" *ngIf="isAuthorized">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon" (click)="printToCart('printSectionId')" *ngIf="rights?.edit=='1'">
+            <img src="../../assets/images/print-icon.png" alt="print icon">
+        </span>
+        <h2>{{utilService.getCompanyHeaderForStore()}}</h2>
+        <span *ngIf="rights?.edit=='1'" [ngClass]="{'submit-text' : isFormOpen == false}" class="lock-icon" (click)="save(taxForm)"
+            title="save">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <div id="printSectionId">
+        <form [formGroup]="taxForm" novalidate>
+            <div class="add-boutique-form clearfix">
+                <div class="form-block">
+                    <div class="width-20">
+                        <div class="company-block">
+                            <div title="{{'vat' | translate}}">
+                                <figure>
+                                    <div class="company-img bg-offwhite">
+                                        <span>
+                                            <img src="../../assets/images/vat.png" alt="vat image">
+                                        </span>
+                                    </div>
+                                    <figcaption> {{'vat' | translate}} </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="width-80">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="tax-label">{{'Company Name *' | translate}}</label>
+                                <input type="text" [ngClass]="{'error': companyNameError == true || ( taxForm.controls['company_name'].touched == true && taxForm.controls['company_name'].hasError('required') )}"
+                                    class="form-control tax-field" formControlName="company_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group width-half">
+                                <label class="tax-label">{{'EU Tax identification number (TIN) *' | translate}}</label>
+                                <input type="text" [ngClass]="{'error': eutinError == true || ( taxForm.controls['EUTIN'].touched == true && taxForm.controls['EUTIN'].hasError('required') )}"
+                                    class="form-control tax-field" formControlName="EUTIN">
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-12">
+                            <div class="form-group width-half">
+                                <label class="tax-label">{{'National Tax identification number' | translate}}</label>
+                                <input type="text" class="form-control tax-field" formControlName="NTIN">
+                            </div>
+                        </div> -->
+                        <div class="col-sm-12">
+                            <div class="form-group width-half">
+                                <label class="tax-label">{{'Default VAT Rate' | translate}}</label>
+                                <input type="text" class="form-control tax-field" formControlName="default_vat_rate">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="tax-label">{{'Local Tax Authorities' | translate}}</label>
+                                <input type="text" class="form-control tax-field" formControlName="LTA">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="document-list">
+            <ul>
+                <li>
+                    <div class="document-block">
+                        <figure>
+                            <div class="document-img bg-offwhite">
+                                <span>
+                                    <img src="../../assets/images/document.png" alt="document img">
+                                </span>
+                            </div>
+                            <figcaption>{{'Document' | translate}}</figcaption>
+                        </figure>
+                    </div>
+                </li>
+                <li *ngFor="let document of documents; let ind = index; ">
+                    <div class="document-block">
+                        <figure>
+                            <div *ngIf="document['company_tax_doc_url'] != '../../assets/images/plus.png' && isFormOpen != false" [ngClass]="(document['company_tax_doc_url'] != '../../assets/images/document.png') ? 'del-img' : ''"
+                                (click)="deleteImage(document['company_tax_doc_url'],ind)">
+                                <img src="../../assets/images/close.png" alt="delete">
+                            </div>
+                            <div class="document-img upload-img">
+                                <span>
+                                    <img *ngIf="document['fileType']=='pdf'" src='../../assets/images/pdf-icon.png' alt="document img">
+
+                                    <img *ngIf="document['fileType']!='pdf'" [src]="document['company_tax_doc_url']" alt="document img">
+                                </span>
+
+                                <input type="file" name="document_{{ind}}" (change)="fileChange($event,ind)" accept=".pdf,.png,.jpg" [hidden]="!isFormOpen">
+                            </div>
+                            <figcaption>
+                                <a *ngIf="document['company_tax_doc_url'] != '../../assets/images/plus.png'" [href]="document['company_tax_doc_url']" target="_blank"
+                                    title="{{'Document' | translate}} {{ind+1}}">{{'Document' | translate}} {{ind+1}}</a>
+                                <div *ngIf="document['company_tax_doc_url'] == '../../assets/images/plus.png'" src="document['company_tax_doc_url']" title="{{'Document' | translate}} {{ind+1}}">{{'Document' | translate}} {{ind+1}}</div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" [disabled]="!permission" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                <span class="visibility">
+                    <img src="../../assets/images/un-visible.png" alt="">
+                </span>
+            </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper" *ngIf="!isAuthorized">
+    <div class="unauthorized-sec">
+        <div class="unauthorized-msg">
+            <div class="unauthorized-img">
+                <span>
+                    <img src="../../../assets/images/app-icon.png" alt="app icon">
+                </span>
+            </div>
+            <div class="unauthorized-content">
+                <h2>{{'You are unauthorized user to perform this activity' | translate}}</h2>
+            </div>
+        </div>
+    </div>
+</div>

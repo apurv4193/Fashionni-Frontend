@@ -1,0 +1,24 @@
+.company-img{height: 218.94px;border-color: #dcdee0;}
+.company-block > div{border: 1px solid #dcdee0;}
+.company-img.bg-offwhite{cursor: auto;}
+.form-group{margin-bottom: 24px;}
+@media(max-width:1900px){
+	.company-img{height: 173.5px;}
+    .form-group{margin-bottom: 18px;}
+}
+@media(max-width:1500px){
+	.company-img{height: 149.64px;}
+    .form-group{margin-bottom: 13px;}
+}
+@media(max-width:1364px){
+	.company-img{height: 172.19px;}
+    .form-group{margin-bottom: 17px;}
+}
+@media(max-width:1200px){
+	.company-img{height: 135.8px;}
+    .form-group{margin-bottom: 11px;}
+}
+@media(max-width:991px){
+	.company-img{height: 101.59px;}
+    .form-group{margin-bottom: 4px;}
+}

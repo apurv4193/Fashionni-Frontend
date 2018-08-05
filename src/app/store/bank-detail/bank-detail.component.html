@@ -1,0 +1,180 @@
+<div class="wrapper" *ngIf="isAuthorized">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon" (click)="printToCart('printSectionId')" *ngIf="rights?.edit=='1'">
+            <img src="../../assets/images/print-icon.png" alt="print icon">
+        </span>
+        <h2>{{utilService.getCompanyHeaderForStore()}}</h2>
+        <span *ngIf="rights?.edit=='1'" [ngClass]="{'submit-text' : isFormOpen == false}" class="lock-icon" (click)="toggleClass()"
+            title="save">
+            <span class="unlock">
+                <i class="fa fa-unlock"></i>
+            </span>
+            <span class="lock">
+                <i class="fa fa-lock"></i>
+            </span>
+        </span>
+    </div>
+    <div class="add-boutique-form clearfix" id="printSectionId">
+        <form [formGroup]="bankForm" novalidate (ngSubmit)="save(bankForm)">
+            <div formArrayName="addresses">
+                <div *ngFor="let address of bankForm.controls.addresses.controls; let i=index" class="panel panel-default">
+                    <div class="panel-body" [formGroupName]="i">
+                        <div class="form-block">
+                            <div class="width-20">
+                                <div class="company-block">
+                                    <div title="{{'Bank' | translate}} {{i + 1}}">
+                                        <figure>
+                                            <div class="company-img upload-img">
+                                                <span>
+                                                    <img [src]="imageArray[i]">
+                                                </span>
+                                                <input type="file" name="pic" (change)="storeImageSet($event,i)" *ngIf="isFormOpen == true">
+                                            </div>
+                                            <figcaption class="clone-icon">
+                                                <span class="delete-icon" title="Delete" *ngIf=" (isFormOpen) && bankForm.controls.addresses.controls.length > 1 && i != 0"
+                                                    (click)="removeAddress(i)">
+                                                    <img alt="delete" src="../../assets/images/close.png">
+                                                </span>
+                                                {{'Bank' | translate}}
+                                                <span class="copy-icon" title="Copy" (click)="addAddress(true)">
+                                                    <i class="fa fa-clone"></i>
+                                                </span>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="width-80">
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>{{'Company Name *' | translate}}</label>
+                                            <input type="text" class="form-control" formControlName="company_name" [ngClass]="{'error': bankForm.controls.addresses.controls[i].controls.company_name.touched == true && bankForm.controls.addresses.controls[i].controls.company_name.invalid == true}">
+                                            <!-- <small *ngIf="bankForm.controls.addresses.controls[i].controls.company_name.touched && bankForm.controls.addresses.controls[i].controls.company_name.invalid"
+                                            class="form-message text-danger">Please insert a Company Name</small> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>{{'IBAN/ Account *' | translate}}</label>
+                                            <input type="text" class="form-control" formControlName="iban_account_no" [ngClass]="{'error': bankForm.controls.addresses.controls[i].controls.iban_account_no.touched == true && bankForm.controls.addresses.controls[i].controls.iban_account_no.invalid == true}">
+                                            <!-- <small *ngIf="bankForm.controls.addresses.controls[i].controls.iban_account_no.touched && bankForm.controls.addresses.controls[i].controls.iban_account_no.invalid"
+                                            class="form-message text-danger">Please insert a Company Name</small> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>{{'Company Address' | translate}}</label>
+                                        <!-- <input type="text" placeholder="Company Address" class="form-control" > -->
+                                        <input type="text" class="form-control" places-auto-complete (place_changed)="companyAddressCallbackClone($event,i)" formControlName="comapny_address"
+                                            [ngClass]="{'error': bankForm.controls.addresses.controls[i].controls.comapny_address.touched == true && bankForm.controls.addresses.controls[i].controls.comapny_address.invalid == true}">
+                                        <!-- <ng4geo-autocomplete class="form-control custom-autocomplete" [userSettings]="userSettings" (componentCallback)="companyAddressCallbackClone($event,i)"></ng4geo-autocomplete> -->
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>{{'Bank Name *' | translate}}</label>
+                                            <input type="text" class="form-control" formControlName="bank_name" [ngClass]="{'error': bankForm.controls.addresses.controls[i].controls.bank_name.touched == true && bankForm.controls.addresses.controls[i].controls.bank_name.invalid == true}">
+                                            <!-- <small *ngIf="bankForm.controls.addresses.controls[i].controls.bank_name.touched && bankForm.controls.addresses.controls[i].controls.bank_name.invalid"
+                                            class="form-message text-danger">Please insert a Company Name</small> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>{{'SWIFT/ BIC *' | translate}}</label>
+                                            <input type="text" class="form-control" formControlName="swift_bic" [ngClass]="{'error': bankForm.controls.addresses.controls[i].controls.swift_bic.touched == true && bankForm.controls.addresses.controls[i].controls.swift_bic.invalid == true}">
+                                            <!-- <small *ngIf="bankForm.controls.addresses.controls[i].controls.swift_bic.touched && bankForm.controls.addresses.controls[i].controls.swift_bic.invalid"
+                                            class="form-message text-danger">Please insert a Company Name</small> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>{{'Bank Address' | translate}}</label>
+                                        <!-- <input type="text" placeholder="Bank Address" class="form-control" > -->
+                                        <!-- <ng4geo-autocomplete class="form-control custom-autocomplete" [userSettings]="userSettings" (componentCallback)="bankAddressCallbackClone($event,i)"></ng4geo-autocomplete> -->
+                                        <input type="text" placeholder="Bank Address" class="form-control" places-auto-complete (place_changed)="bankAddressCallbackClone($event,i)"
+                                            formControlName="bank_address" [ngClass]="{'error': bankForm.controls.addresses.controls[i].controls.bank_address.touched == true && bankForm.controls.addresses.controls[i].controls.bank_address.invalid == true}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" [disabled]="!permission" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                <span class="visibility">
+                    <img src="../../assets/images/un-visible.png" alt="">
+                </span>
+            </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper" *ngIf="!isAuthorized">
+    <div class="unauthorized-sec">
+        <div class="unauthorized-msg">
+            <div class="unauthorized-img">
+                <span>
+                    <img src="../../../assets/images/app-icon.png" alt="app icon">
+                </span>
+            </div>
+            <div class="unauthorized-content">
+                <h2>{{'You are unauthorized user to perform this activity' | translate}}</h2>
+            </div>
+        </div>
+    </div>
+</div>

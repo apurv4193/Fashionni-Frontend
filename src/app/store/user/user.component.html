@@ -1,0 +1,163 @@
+<div class="wrapper" *ngIf="isAuthorized">
+    <div class="company-heading bg-offwhite">
+        <span class="print-icon" (click)="printToCart('printSectionId')" *ngIf="rights?.edit=='1'">
+            <img src="../../assets/images/print-icon.png" alt="print icon">
+        </span>
+        <h2>{{utilService.getCompanyHeaderForStore()}}</h2>
+    </div>
+    <div id="printSectionId">
+        <ul class="user-list">
+            <li *ngFor="let user of userDetail;let index = inedx; ">
+                <div class="user-block">
+                    <a href="javascript:void();" title="User Name" *ngIf="user.defaults == 1">
+                        <figure>
+                            <div class="user-img">
+                                <span>
+                                    <img src="../../assets/images/user-sm.png">
+                                </span>
+                            </div>
+                            <figcaption>{{ user.user_unique_id }}</figcaption>
+                        </figure>
+                    </a>
+                    <a (click)="edituser(user.id)" title="User Name" *ngIf="user.defaults != 1">
+                        <figure>
+                            <div class="user-img">
+                                <span>
+                                    <img [src]="user.user_image">
+                                </span>
+                            </div>
+                            <figcaption>{{ user.name }}</figcaption>
+                        </figure>
+                    </a>
+                </div>
+            </li>
+            <li *ngIf="rights?.edit=='1'">
+                <div class="user-block">
+                    <a (click)="addUser()" title="User Name">
+                        <figure>
+                            <div class="user-img">
+                                <span>
+                                    <img src="../../assets/images/plus-small.png">
+                                </span>
+                            </div>
+                            <figcaption></figcaption>
+                        </figure>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="notification-sec">
+        <h2 *ngIf="unReadNotificationList?.length > 0">
+            <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+        </h2>
+        <div class="notification-list">
+            <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                <div class="date-block">
+                    <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                    <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                </div>
+                <div class="content-block">{{notification.notification_text}}
+                    <span class="checkbox">
+                        <label>
+                            <input type="checkbox" [disabled]="!permission" (change)="readNotification(notification, index)">
+                            <span class="checker"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h2 class="confirm-notification">
+            <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == false" src="../../assets/images/un-visible.png" alt="">
+            </span>
+            <span class="visibility" (click)="hideNotification()">
+                <img *ngIf="hideNotificationFlag == true" src="../../assets/images/visible.png" alt="">
+            </span>
+        </h2>
+        <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+            <!-- <h2>
+                <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                <span class="visibility">
+                    <img src="../../assets/images/un-visible.png" alt="">
+                </span>
+            </h2> -->
+            <div *ngIf="hideNotificationFlag">
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="notification-sec">
+
+            <h2 *ngIf="unReadNotificationList?.length > 0">
+                <img src="../../assets/images/pencil-icon.png" alt="pencil icon">
+            </h2>
+            <div class="notification-list">
+                <div class="notification-block" *ngFor="let notification of unReadNotificationList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" (change)="readNotification(notification, index)">
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="confirm-notification" *ngIf="readNotificationsList?.length > 0">
+                <h2>
+                    <img src="../../assets/images/tick-icon.png" alt="pencil icon">
+                    <span class="visibility">
+                        <img src="../../assets/images/un-visible.png" alt="">
+                    </span>
+                </h2>
+                <div class="notification-block" *ngFor="let notification of readNotificationsList; let index = index;" [ngClass]="{'boutique-noti':notification.notification_type == '0', 'admin-noti':notification.notification_type == '1'}">
+                    <div class="date-block">
+                        <span class="date">{{notification.date_1 | date : 'dd.MM.yyyy'}}</span>
+                        <span class="day">{{notification.date_1 | date : 'E'}}.</span>
+                    </div>
+                    <div class="content-block">{{notification.notification_text}}
+                        <span class="checkbox">
+                            <label>
+                                <input type="checkbox" checked>
+                                <span class="checker"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+</div>
+
+<div class="wrapper" *ngIf="!isAuthorized">
+    <div class="unauthorized-sec">
+        <div class="unauthorized-msg">
+            <div class="unauthorized-img">
+                <span>
+                    <img src="../../../assets/images/app-icon.png" alt="app icon">
+                </span>
+            </div>
+            <div class="unauthorized-content">
+                <h2>{{'You are unauthorized user to perform this activity' | translate}}</h2>
+            </div>
+        </div>
+    </div>
+</div>
